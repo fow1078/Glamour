@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import BackgroundVideo from '../Secondary Components/BackgroundVideo';
 import FirstNav from '../Header_Navs_Footer/FirstNav';
 import SecondNav from '../Header_Navs_Footer/SecondNav';
@@ -13,6 +13,16 @@ import { useSelector } from 'react-redux';
 
 function Home() {
   const { isEnglish } = useSelector((store) => store.lang);
+  const [data, setData] = useState('');
+  useEffect(() => {
+    fetch("http://localhost:8080/api/data").then((res) =>
+        res.json().then((data) => {
+          setData(data.message);
+            console.log(data);
+        })
+    );
+  }, []);
+
   return (
     <>
       <BackgroundVideo />

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { openModal, closeModal } from '../features/Modal/modalSlice';
 import { useEffect } from "react";
 import { calculateTotals } from "../features/Cart/cartSlice";
-import { changeLanguage } from '../features/Translator /translatorSlice';
+import { changeLanguage } from '../features/Translator/translatorSlice';
 import Ukrainian from '../assets/images/ukraine.png'
 import English from '../assets/images/usa.png'
 

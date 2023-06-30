@@ -131,8 +131,8 @@ li {list-style-type: none;}
 
 @keyframes slide-left {
   0% {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
+    -webkit-transform: translateX(150px);
+            transform: translateX(150px);
   }
   100% {
     -webkit-transform: translateX(-100px);
@@ -141,8 +141,8 @@ li {list-style-type: none;}
 }
 
 .slide-left {
-	-webkit-animation: slide-left 0.175s ease-in forwards;
-	        animation: slide-left 0.175s ease-in forwards;
+	-webkit-animation: slide-left 0.2s ease-in forwards;
+	        animation: slide-left 0.2s ease-in forwards;
 }
 
 

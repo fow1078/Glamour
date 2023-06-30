@@ -33,18 +33,18 @@ function AdminAddNew() {
   const handleDescrUAChange = (e) => {
     setDescrUA(e.target.value);
   }
-  const [newSizes, setNewSizes] = useState([]);
+
+  const sizesSet = new Set();
   const handleSizeChange = (e) => {
     let val = e.target.value;
     if (e.target.checked) {
-      console.log(val);
-      const temp = [...newSizes];
-      temp.push(val); 
-      setNewSizes(temp);
+      sizesSet.add(val);
     } else {
-      const temp = [...newSizes];
+      sizesSet.delete(val);
     }
   }
+
+  
 
   return (
     <>
