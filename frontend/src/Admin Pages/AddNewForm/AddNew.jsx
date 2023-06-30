@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 
 import AdminBg from '../Components/AdminBg';
 import AdminNavigation from '../Components/AdminNavigation';
+import postData from '../../common/postData'
 
 function AdminAddNew() {
+  const [randomData, setData] = useState('');
+  // useEffect(() => {
+  //   fetch("http://localhost:8080/api/data").then((res) =>
+  //       res.json().then((data) => {
+  //         setData(data.message);
+  //           console.log(data);
+  //       })
+  //   );
+  // }, []);
   // Inputs Control
   // Label
   const [label, setLabel] = useState('');
@@ -44,6 +54,21 @@ function AdminAddNew() {
     }
   }
 
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const data = {
+      label: label,
+      price: {
+        uah: uah,
+        usd: usd
+      },
+      description_EN: descrEN, 
+      description_UA: descrUA,
+      sizes: [...sizesSet]
+    }
+    postData("http://localhost:8080/api/data", data)
+  }
   
 
   return (
@@ -54,6 +79,7 @@ function AdminAddNew() {
         <div style={{marginTop: '40px', width: '100%', textAlign: 'center'}}>
           <h3 style={{color: '#fff'}}>Add New Item</h3>
         </div>
+        {randomData}
         <form className='addnew-form' style={{width: '100%', backgroundColor: '#ffffffc5', borderRadius: '10px' }}>
           <Row>
             <Col xs={12} lg={4}>
@@ -125,7 +151,7 @@ function AdminAddNew() {
             </Col>
             <Col xs={12} md={6} style={{display: 'flex', alignItems: 'flex-end'}}>
               <div style={{width: '100%', textAlign: 'end'}}>
-                <button type='' style={{padding: '10px 25px', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '5px'}}>Submit</button>
+                <button type='' onClick={handleClick} style={{padding: '10px 25px', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '5px'}}>Submit</button>
               </div>
             </Col>
           </Row>

@@ -13,15 +13,6 @@ import { useSelector } from 'react-redux';
 
 function Home() {
   const { isEnglish } = useSelector((store) => store.lang);
-  const [data, setData] = useState('');
-  useEffect(() => {
-    fetch("http://localhost:8080/api/data").then((res) =>
-        res.json().then((data) => {
-          setData(data.message);
-            console.log(data);
-        })
-    );
-  }, []);
 
   return (
     <>
