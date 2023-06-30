@@ -44,6 +44,7 @@ function AdminAddNew() {
     setDescrUA(e.target.value);
   }
 
+  // Sizes
   const sizesSet = new Set();
   const handleSizeChange = (e) => {
     let val = e.target.value;
@@ -53,6 +54,9 @@ function AdminAddNew() {
       sizesSet.delete(val);
     }
   }
+
+  // Images
+  const [images, setImages] = useState();
 
 
   const handleClick = (e) => {
@@ -160,7 +164,5 @@ function AdminAddNew() {
     </>
   )
 }
-   {/* 
-            Title, prices, sizes, descriptions, images
-          */}
+
 export default AdminAddNew;
