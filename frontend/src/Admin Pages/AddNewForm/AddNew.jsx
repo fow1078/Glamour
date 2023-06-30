@@ -56,8 +56,13 @@ function AdminAddNew() {
   }
 
   // Images
-  const [images, setImages] = useState();
-
+  const [images, setImages] = useState('');
+  const handleImagesChange = (e) => {
+    const files = Array.from(event.target.files);
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    
+  }
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -69,9 +74,10 @@ function AdminAddNew() {
       },
       description_EN: descrEN, 
       description_UA: descrUA,
-      sizes: [...sizesSet]
+      sizes: [...sizesSet],
+      images: images
     }
-    postData("http://localhost:8080/api/data", data)
+    postData("http://localhost:8080/api/data", data);
   }
   
 
@@ -150,7 +156,7 @@ function AdminAddNew() {
             <Col xs={12} md={6}>
               <div style={{display: 'flex', flexDirection: 'column'}}>
                 <label htmlFor='item-images' style={{fontSize: '18px', fontWeight: '500'}}>Images</label>
-                <input type='file' className='no-focus' id='item-images' name='item-images' style={{borderRadius: '5px', backgroundColor: '#00000037', border: '2px solid #000', padding: '4px'}} />
+                <input multiple type='file' accept="image/*" value={images} onChange={handleImagesChange} className='no-focus' id='item-images' name='item-images' style={{borderRadius: '5px', backgroundColor: '#00000037', border: '2px solid #000', padding: '4px'}} />
               </div>
             </Col>
             <Col xs={12} md={6} style={{display: 'flex', alignItems: 'flex-end'}}>
