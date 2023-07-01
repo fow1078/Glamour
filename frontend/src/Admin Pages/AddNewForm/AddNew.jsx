@@ -45,13 +45,16 @@ function AdminAddNew() {
   }
 
   // Sizes
-  const sizesSet = new Set();
+  const [uniqeSizes, setUniqueSizes] = useState([])
   const handleSizeChange = (e) => {
     let val = e.target.value;
     if (e.target.checked) {
-      sizesSet.add(val);
+      let arr = [...uniqeSizes];
+      arr.push(val)
+      setUniqueSizes(arr)
     } else {
-      sizesSet.delete(val);
+      let arr = [...uniqeSizes].filter((item) => item !== val);
+      setUniqueSizes(arr)
     }
   }
 
@@ -68,11 +71,12 @@ function AdminAddNew() {
       }
       reader.readAsDataURL(file);
     })
-    console.log(tempImageArray)
     setImages(tempImageArray)
   }
 
   const handleClick = (e) => {
+    e.preventDefault()
+    console.log(uniqeSizes)
     const data = {
       label: label.trim(),
       price: {
@@ -82,10 +86,13 @@ function AdminAddNew() {
       description_EN: descrEN.trim(), 
       description_UA: descrUA.trim(),
       slug: label.toLowerCase().replaceAll(/\W/g, '-').replaceAll(/-+/g, '-').replace(/^-/, '').replace(/-$/, ''),
-      sizes: [...sizesSet].length > 0 ? [...sizesSet] : 'OS',
-      images: images
+      images: images,
+      sizes: uniqeSizes.length < 1 ? 'OS' : uniqeSizes
     }
-    postData("http://localhost:8080/api/data", data);
+    console.log(data)
+    setTimeout(() => {
+      postData("http://localhost:8080/api/data", data)
+    }, 2000)
   }
   
 
@@ -97,7 +104,6 @@ function AdminAddNew() {
         <div style={{marginTop: '40px', width: '100%', textAlign: 'center'}}>
           <h3 style={{color: '#fff'}}>Add New Item</h3>
         </div>
-        {randomData}
         <form className='addnew-form' style={{width: '100%', backgroundColor: '#ffffffc5', borderRadius: '10px' }}>
           <Row>
             <Col xs={12} lg={4}>
