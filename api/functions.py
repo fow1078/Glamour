@@ -9,6 +9,6 @@ def generate_item_ID():
     item_ID = ""
     
     for i in range(12):
-        item_ID += all_symbols[random.randint(0, len(all_symbols))]
+        item_ID += all_symbols[random.randint(0, len(all_symbols) - 1)]
     
     return item_ID
