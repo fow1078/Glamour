@@ -28,7 +28,7 @@ export default function HashNavigation({
   const onHashChange = () => {
     emit('hashChange');
     const newHash = document.location.hash.replace('#', '');
-    const activeSlideEl = swiper.slidesEl.querySelector(`[data-swiper-slide-index="${swiper.activeIndex}"]`);
+    const activeSlideEl = swiper.virtual && swiper.params.virtual.enabled ? swiper.slidesEl.querySelector(`[data-swiper-slide-index="${swiper.activeIndex}"]`) : swiper.slides[swiper.activeIndex];
     const activeSlideHash = activeSlideEl ? activeSlideEl.getAttribute('data-hash') : '';
     if (newHash !== activeSlideHash) {
       const newIndex = swiper.params.hashNavigation.getSlideIndex(swiper, newHash);
@@ -38,7 +38,7 @@ export default function HashNavigation({
   };
   const setHash = () => {
     if (!initialized || !swiper.params.hashNavigation.enabled) return;
-    const activeSlideEl = swiper.slidesEl.querySelector(`[data-swiper-slide-index="${swiper.activeIndex}"]`);
+    const activeSlideEl = swiper.virtual && swiper.params.virtual.enabled ? swiper.slidesEl.querySelector(`[data-swiper-slide-index="${swiper.activeIndex}"]`) : swiper.slides[swiper.activeIndex];
     const activeSlideHash = activeSlideEl ? activeSlideEl.getAttribute('data-hash') || activeSlideEl.getAttribute('data-history') : '';
     if (swiper.params.hashNavigation.replaceState && window.history && window.history.replaceState) {
       window.history.replaceState(null, null, `#${activeSlideHash}` || '');

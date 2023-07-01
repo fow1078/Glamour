@@ -28,7 +28,6 @@ export default function Grid({
       rows,
       fill
     } = swiper.params.grid;
-    slidesPerRow = slidesNumberEvenToRows / rows;
     numFullColumns = Math.floor(slidesLength / rows);
     if (Math.floor(slidesLength / rows) === slidesLength / rows) {
       slidesNumberEvenToRows = slidesLength;
@@ -38,6 +37,7 @@ export default function Grid({
     if (slidesPerView !== 'auto' && fill === 'row') {
       slidesNumberEvenToRows = Math.max(slidesNumberEvenToRows, slidesPerView * rows);
     }
+    slidesPerRow = slidesNumberEvenToRows / rows;
   };
   const updateSlide = (i, slide, slidesLength, getDirectionLabel) => {
     const {
@@ -74,6 +74,8 @@ export default function Grid({
       row = Math.floor(i / slidesPerRow);
       column = i - row * slidesPerRow;
     }
+    slide.row = row;
+    slide.column = column;
     slide.style[getDirectionLabel('margin-top')] = row !== 0 ? spaceBetween && `${spaceBetween}px` : '';
   };
   const updateWrapperSize = (slideSize, snapGrid, getDirectionLabel) => {

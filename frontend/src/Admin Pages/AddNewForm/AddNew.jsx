@@ -68,11 +68,11 @@ function AdminAddNew() {
       }
       reader.readAsDataURL(file);
     })
-    console.log(tempImageArray)
     setImages(tempImageArray)
   }
 
   const handleClick = (e) => {
+    e.preventDefault();
     const data = {
       label: label.trim(),
       price: {
@@ -97,7 +97,6 @@ function AdminAddNew() {
         <div style={{marginTop: '40px', width: '100%', textAlign: 'center'}}>
           <h3 style={{color: '#fff'}}>Add New Item</h3>
         </div>
-        {randomData}
         <form className='addnew-form' style={{width: '100%', backgroundColor: '#ffffffc5', borderRadius: '10px' }}>
           <Row>
             <Col xs={12} lg={4}>
