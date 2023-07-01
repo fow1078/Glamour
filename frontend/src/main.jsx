@@ -62,11 +62,6 @@ const router = createBrowserRouter([
 
   }, 
   {
-    path: 'admin',
-    element: <AdminAuth />,
-    errorElement: <Error_pageAdmin />
-  }, 
-  {
     path: 'admin/add-new',
     element: <AdminAddNew />,
     errorElement: <Error_pageAdmin />
