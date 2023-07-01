@@ -18,7 +18,6 @@ import Exchange from './Pages/Exchange';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 
 // Admin Pages
-import AdminAuth from './Admin Pages/AdminAuth';
 import AdminAddNew from './Admin Pages/AddNewForm/AddNew';
 
 import Error_page from './Secondary Components/Error_page';
