@@ -43,6 +43,20 @@ class Item(db.Model):
         self.sizes = sizes
         self.image = image
     
+    def toJSON(self):
+        return {
+            'id': self.id,
+            'itemID': self.itemID,
+            'name': self.name,
+            'price_USD': self.price_USD,
+            'price_UAH': self.price_UAH,
+            'description': self.description,
+            'description_en': self.description_en,
+            'slug': self.slug,
+            'sizes': self.sizes,
+            'image': self.image
+        }
+    
 class Order(db.Model):
     __bind_key__ = 'order'
     __tablename__ = 'order'
@@ -123,3 +137,12 @@ def data():
         
         except Exception as e:
             return str(e)
+        
+
+@app.route("/api/send_data", methods=['POST', 'OPTIONS', 'GET'])
+def send_data():
+    all_data = []
+    data = Item.query.order_by(Item.id).all()
+    for i in data:
+        all_data.append(json.dumps(i.toJSON()))
+    return all_data
