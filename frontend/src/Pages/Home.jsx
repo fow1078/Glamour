@@ -6,7 +6,6 @@ import Footer from '../Header_Navs_Footer/Footer';
 import CatalogItem from '../Secondary Components/CatalogItem';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
-import { items } from '../data/data';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 

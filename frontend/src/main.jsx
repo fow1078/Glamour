@@ -16,6 +16,7 @@ import Item from './Pages/Item';
 import Payment from './Pages/Payment';
 import Exchange from './Pages/Exchange';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
+import CheckOut from './Pages/CheckOut';
 
 // Admin Pages
 import AdminAddNew from './Admin Pages/AddNewForm/AddNew';
@@ -74,6 +75,11 @@ const router = createBrowserRouter([
     path: 'admin/edit',
     element: <AdminAddNew />,
     errorElement: <Error_pageAdmin />
+  }, 
+  {
+    path: 'checkout',
+    element: <CheckOut />,
+    errorElement: <Error_page />
   }
 
 ]);

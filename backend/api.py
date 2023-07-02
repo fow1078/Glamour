@@ -167,7 +167,7 @@ def data():
         try:
             db.session.add(item)
             db.session.commit()
-            return 200
+            return '200'
         
         except Exception as e:
             return str(e)
@@ -209,7 +209,7 @@ def order_data():
         try:
             db.session.add(order)
             db.session.commit()
-            return 200
+            return '200'
         
         except Exception as e:
             return str(e)
@@ -243,7 +243,7 @@ def support_data():
         try:
             db.session.add(support)
             db.session.commit()
-            return 200
+            return '200'
         
         except Exception as e:
             return str(e)
