@@ -183,7 +183,7 @@ def send_data():
 
 
 @app.route('/api/order_data', methods=['POST', 'OPTIONS', 'GET'])
-def data():
+def order_data():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight request successful'})
         response.headers.add('Access-Control-Allow-Methods', 'POST')
@@ -216,7 +216,7 @@ def data():
         
         
 @app.route("/api/send_order_data", methods=['POST', 'OPTIONS', 'GET'])
-def send_data():
+def send_order_data():
     all_data = []
     data = Order.query.order_by(Order.id).all()
     for i in data:
@@ -225,7 +225,7 @@ def send_data():
 
 
 @app.route('/api/support_data', methods=['POST', 'OPTIONS', 'GET'])
-def data():
+def support_data():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight request successful'})
         response.headers.add('Access-Control-Allow-Methods', 'POST')
@@ -250,7 +250,7 @@ def data():
         
         
 @app.route("/api/send_support_data", methods=['POST', 'OPTIONS', 'GET'])
-def send_data():
+def send_support_data():
     all_data = []
     data = Support.query.order_by(Support.id).all()
     for i in data:
