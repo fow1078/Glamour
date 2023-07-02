@@ -5,6 +5,7 @@ const initialState = {
   cartItems: [],
   amount: 0,
   total: 0,
+  total_UAH: 0,
   isLoading: true
 }
 
@@ -44,15 +45,18 @@ const cartSlice = createSlice({
         state.cartItems = state.cartItems.filter((item) => { return item.id !== itemId })
       }
     }, 
-    calculateTotals: (state) => {
+    calculateTotals: (state, { payload }) => {
       let amount = 0;
       let total = 0; 
+      let total_UAH = 0;
       state.cartItems.forEach((item) => {
         amount += item.amount;
-        total += item.amount * item.price;
+        total += item.amount * item.price_USD;
+        total_UAH += item.amount * item.price_UAH;
       })
       state.amount = amount;
       state.total = total;
+      state.total_UAH = total_UAH;
     },
     clearCart: (state) => {
       state.cartItems = [];

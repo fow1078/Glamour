@@ -13,12 +13,15 @@ import { useSelector } from 'react-redux';
 
 function Home() {
   const { isEnglish } = useSelector((store) => store.lang);
+  const [clothesData, setClothesData] = useState([]);
   useEffect(() => {
     fetch("http://localhost:8080/api/send_data").then((res) =>
-        res.json().then((data) => {
-            console.log(data);
+        res.json().then((data) => { 
+          let tmpArr = [];
+          data.forEach(item => tmpArr.push(JSON.parse(item)))
+          setClothesData(tmpArr);
         })
-      );
+    );
   }, []);
 
   return (
@@ -29,8 +32,8 @@ function Home() {
         <SecondNav />
         <Container>
           <Row>
-            {items.map((data, ind) => {
-              return <CatalogItem key={ind} data={data} />
+            {clothesData.map((data) => {
+              return <CatalogItem key={data.name} data={data} />
             })}
           </Row>
           <div style={{width: '100%', textAlign: 'center', marginTop: '60px'}}>

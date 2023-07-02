@@ -3,14 +3,15 @@ import { ChevronUp, ChevronDown } from '../icons';
 import { removeItem, increase, decrease } from '../features/Cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-function CartItem({ id, label, image, price, amount, size }) {
+function CartItem({ id, label, image, price_USD, price_UAH, amount, size }) {
   const dispatch = useDispatch();
+  const { isUSD } = useSelector((store) => store.curr);
   return (
     <article className='cart-item'>
       <img src={image} alt={label} style={{}} />
       <div>
         <h4>{label} {size}</h4>
-        <h5 className="item-price">${price}</h5>
+        <h5 className="item-price">{isUSD ? `$${price_USD}` : `₴${price_UAH}`}</h5>
         <button className='remove-btn' onClick={() => {dispatch(removeItem(id))}}>X</button>
       </div>
       <div>

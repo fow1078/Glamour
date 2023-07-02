@@ -17,15 +17,17 @@ import { useState } from 'react';
 function Item() {
   const [size, setSize] = useState('');
   const { isEnglish } = useSelector((store) => store.lang);
+  const { isUSD } = useSelector((store) => store.curr)
   const dispatch = useDispatch();
   let { state } = useLocation();
   let itemData = state.data;
   const handleAdd = () => {
-    if (size !== '') {
-      dispatch(addToCart({id: itemData.id + size, image: itemData.defaultImage, label: itemData.label, size: size, price: itemData.price, amount: 1}))
+    if (size !== '' ) {
+      dispatch(addToCart({id: itemData.itemID + size, image: itemData.image.split(', ')[0], label: itemData.name, size: size, price_USD: itemData.price_USD, price_UAH: itemData.price_UAH, amount: 1}))
     }
   }
-
+  const tmpSizes = itemData.sizes.split(', ');
+  tmpSizes.pop();
   return (
     <>
       <BackgroundVideo />
@@ -35,26 +37,34 @@ function Item() {
         <Container style={{padding: '80px 20px'}}>
           <Row>
             <Col xs={{span: 12}} md={{span: 5, offset: 0}}>
-              <ItemGallery images={itemData.secondaryImages} />          
+              <ItemGallery images={itemData.image.split(', ')} />          
             </Col>
             <Col xs={{span: 12}} md={{span: 6, offset: 1}} style={{margin: 'auto'}}>
               <div style={{width: '100%', display: 'flex', flexDirection: 'column',}}>
-                <h5 style={{color: '#fff', fontSize: '18px'}}>{itemData.label}</h5>
-                <p style={{color: '#fff', marginBottom: '10px'}}>${itemData.price} USD</p>
+                <h5 style={{color: '#fff', fontSize: '18px'}}>{itemData.name}</h5>
+                <p style={{color: '#fff', marginBottom: '10px'}}>{isUSD ? `$${itemData.price_USD} USD` :  `₴${itemData.price_UAH} UAH`}</p>
               </div>
               <div style={{width: '100%'}}>
-                <Sizes sizes={itemData.sizes} size={size} setSize={setSize} />
+                <Sizes sizes={itemData.sizes === '' ? ['OS'] : tmpSizes} size={size} setSize={setSize} />
               </div>
               <div style={{width: '100%', marginBottom: '30px'}}>
                 <button className='addtocart-btn' onClick={handleAdd}>{isEnglish ? 'Add To Cart' : 'Додати до кошика'}</button>
               </div>
               <div>
                 <ul>
-                  {itemData.description.split('- ').map((el, ind) => {
+                  
+                  {isEnglish ? itemData.description_en.split('- ').map((el, ind) => {
                     if (el) {
                       return <li key={ind} className='descriptionList'>{' ' + el}</li> 
                     }
-                  })}
+                  }) 
+                    :
+                  itemData.description.split('- ').map((el, ind) => {
+                    if (el) {
+                      return <li key={ind} className='descriptionList'>{' ' + el}</li> 
+                    }
+                  })
+                  }
                 </ul>
               </div>
             </Col>

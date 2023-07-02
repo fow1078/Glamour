@@ -7,27 +7,35 @@ import CatalogItem from '../Secondary Components/CatalogItem';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
-import { items } from '../data/data';
 import { useSelector } from 'react-redux';
 
 function Catalog() {
   const [sortOption, setSortOption] = useState('');
-  const [clothesData, setClothesData] = useState(items);
+  const { isUSD } = useSelector((store) => store.curr)
+  const [clothesData, setClothesData] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:8080/api/send_data").then((res) =>
+        res.json().then((data) => { 
+          let tmpArr = [];
+          data.forEach(item => tmpArr.push(JSON.parse(item)))
+          setClothesData(tmpArr);
+        })
+    );
+  }, []);
+
   const { isEnglish } = useSelector((store) => store.lang);
   const handleSortOptionChange = () => {
     const value = document.querySelector('#select_sort').value;
     setSortOption(value);
   }
-  useEffect(() => {
-    setClothesData(items)
-  }, [])
+
   useEffect(() => {
     async function changeOrder() {
       if (sortOption === 'title-ascending') {
         const sortAscTitle = [...clothesData];
         sortAscTitle.sort(function(a, b) {
-          let fa = a.label.toLowerCase(),
-          fb = b.label.toLowerCase();
+          let fa = a.name.toLowerCase(),
+          fb = b.name.toLowerCase();
           if (fa < fb) {
               return -1;
           }
@@ -40,8 +48,8 @@ function Catalog() {
       } else if (sortOption === 'title-descending') {
         const sortDescTitle = [...clothesData];
         sortDescTitle.sort(function(a, b) {
-          let fa = a.label.toLowerCase(),
-          fb = b.label.toLowerCase();
+          let fa = a.name.toLowerCase(),
+          fb = b.name.toLowerCase();
           if (fa > fb) {
               return -1;
           }
@@ -54,13 +62,21 @@ function Catalog() {
       } else if (sortOption === 'price-ascending') {
         const sortAscPrices = [...clothesData];
         sortAscPrices.sort(function(a, b) {
-          return a.price - b.price;
+          if (isUSD) {
+            return a.price_USD - b.price_USD;
+          } else {
+            return a.price_UAH - b.price_UAH;
+          }
         });
         setClothesData(sortAscPrices);
       } else if (sortOption === 'price-descending') {
         const sortDescPrices = [...clothesData];
         sortDescPrices.sort(function(a, b) {
-          return b.price - a.price;
+          if (isUSD) {
+            return b.price_USD - a.price_USD;
+          } else {
+            return b.price_UAH - a.price_UAH;
+          }
         });
         setClothesData(sortDescPrices);
       }  
@@ -92,7 +108,7 @@ function Catalog() {
                 </select>
               </Col>
               <Col className='d-flex justify-content-end align-items-center'>
-                <label style={{color: '#fff'}}>{items.length} {isEnglish ? 'Products' : 'Товарів'}</label>
+                <label style={{color: '#fff'}}>{clothesData.length} {isEnglish ? 'Products' : 'Товарів'}</label>
               </Col>
             </Row>
           </Container>

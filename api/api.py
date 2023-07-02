@@ -22,7 +22,7 @@ class Item(db.Model):
     __tablename__ = 'clothes'
     
     id = db.Column(db.Integer, primary_key=True)
-    itemID = db.Column(db.Integer, nullable=False)
+    itemID = db.Column(db.String(100), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     price_USD = db.Column(db.Integer, nullable=False)
     price_UAH = db.Column(db.Integer, nullable=False)
@@ -120,8 +120,8 @@ def data():
             string_images += image
             string_images += ", "
             
-        item = Item(data['label'],
-                    generate_item_ID(),
+        item = Item(generate_item_ID(),
+                    data['label'],
                     data['price']['usd'],
                     data['price']['uah'],
                     data['description_UA'],

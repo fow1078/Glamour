@@ -75,8 +75,7 @@ function AdminAddNew() {
   }
 
   const handleClick = (e) => {
-    e.preventDefault()
-    console.log(uniqeSizes)
+    e.preventDefault();
     const data = {
       label: label.trim(),
       price: {
@@ -87,9 +86,8 @@ function AdminAddNew() {
       description_UA: descrUA.trim(),
       slug: label.toLowerCase().replaceAll(/\W/g, '-').replaceAll(/-+/g, '-').replace(/^-/, '').replace(/-$/, ''),
       images: images,
-      sizes: uniqeSizes.length < 1 ? 'OS' : uniqeSizes
+      sizes: uniqeSizes.length < 1 ? '' : uniqeSizes
     }
-    console.log(data)
     setTimeout(() => {
       postData("http://localhost:8080/api/data", data)
     }, 2000)

@@ -8,8 +8,9 @@ import { clearCart } from '../features/Cart/cartSlice';
 
 function Cart() {
   const { isOpen } = useSelector((store) => store.modal);
-  const { cartItems, amount, total } = useSelector((store) => store.cart);
+  const { cartItems, amount, total, total_UAH } = useSelector((store) => store.cart);
   const { isEnglish } = useSelector((store) => store.lang);
+  const { isUSD } = useSelector((store) => store.curr);
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(closeModal())
@@ -44,7 +45,7 @@ function Cart() {
         <footer>
           <div className="cart-total">  
             <h4>
-              {isEnglish ? 'Total' : 'Сума'} <span>${total.toFixed(2)}</span>
+              {isEnglish ? 'Total' : 'Сума'} <span>{isUSD ? `$${total.toFixed(2)}` : `₴${total_UAH.toFixed(2)}`}</span>
             </h4>
           </div>
           <div style={{display: 'flex'}}>
