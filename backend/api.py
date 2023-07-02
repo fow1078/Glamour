@@ -1,4 +1,5 @@
 import json
+import telebot
 
 from flask import Flask, jsonify
 from functions import generate_ID
@@ -6,9 +7,12 @@ from flask import request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
+TOKEN = '5862336139:AAGIhDXjNIOwzr-usk1VNOQgCbEJZ4mmJxM'
+chat_id = 0
 
 app = Flask(__name__)
 cors = CORS(app)
+bot = telebot.TeleBot(TOKEN)
 
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///item.db'
@@ -76,6 +80,7 @@ class Order(db.Model):
     phone_number = db.Column(db.String(100), nullable=False)
     price_UAH = db.Column(db.Integer, nullable=False)
     price_USD = db.Column(db.Integer, nullable=False)
+    isChecked = db.Column(db.Boolean, nullable=True)
     
     def __init__(self, order_id, email, country, first_name, last_name, address, address_details, city, postal_code, phone_number, price_UAH, price_USD):
         self.order_id = order_id
@@ -90,6 +95,7 @@ class Order(db.Model):
         self.phone_number = phone_number
         self.price_UAH = price_UAH
         self.price_USD = price_USD
+        self.isChecked = False
         
     def toJSON(self):
         return {
@@ -105,7 +111,8 @@ class Order(db.Model):
             'postal_code': self.postal_code,
             'phone_number': self.phone_number,
             'price_UAH': self.price_UAH,
-            'price_USD': self.price_UAH
+            'price_USD': self.price_UAH,
+            'isChecked': self.isChecked
         }
 
 class Support(db.Model):
@@ -117,19 +124,22 @@ class Support(db.Model):
     email = db.Column(db.String(100), nullable=False)
     phone_number = db.Column(db.String(100), nullable=False)
     comment = db.Column(db.String(100000), nullable=False)
+    isChecked = db.Column(db.Boolean, nullable=True)
     
     def __init__(self, full_name, email, phone_number, comment):
         self.full_name = full_name
         self.email = email
         self.phone_number = phone_number
         self.comment = comment
+        self.isChecked = False
         
     def toJSON(self):
         return {
             'full_name': self.full_name,
             'email': self.email,
             'phone_number': self.phone_number,
-            'comment': self.comment
+            'comment': self.comment,
+            'isChecked': self.isChecked
         }
 
 
