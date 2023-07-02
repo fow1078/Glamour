@@ -30,7 +30,7 @@ function Home() {
       <div style={{paddingTop: '80px', paddingBottom: '120px'}}>
         <SecondNav />
         <Container>
-          <Row>
+          <Row style={{padding: '40px 0'}}>
             {clothesData.map((data) => {
               return <CatalogItem key={data.name} data={data} />
             })}

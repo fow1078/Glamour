@@ -17,6 +17,8 @@ import Payment from './Pages/Payment';
 import Exchange from './Pages/Exchange';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import CheckOut from './Pages/CheckOut';
+import CheckoutFinal from './Pages/CheckoutFinal';
+
 
 // Admin Pages
 import AdminAddNew from './Admin Pages/AddNewForm/AddNew';
@@ -79,6 +81,11 @@ const router = createBrowserRouter([
   {
     path: 'checkout',
     element: <CheckOut />,
+    errorElement: <Error_page />
+  },
+  {
+    path: 'checkout/final',
+    element: <CheckoutFinal />,
     errorElement: <Error_page />
   }
 

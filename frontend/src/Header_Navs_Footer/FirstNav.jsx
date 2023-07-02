@@ -34,7 +34,6 @@ function FirstNav() {
       document.body.classList.remove('body-scroll');
     }
   }
-  const [currency, setCurrency] = useState('USD');
   const handleCurrencyChange = (e) => {
     if (e.target.value === 'USD') {
       dispatch(changeCurrency({ifUsd: true}));

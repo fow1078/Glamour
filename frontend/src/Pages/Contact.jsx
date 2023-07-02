@@ -45,7 +45,6 @@ function Contact() {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     const data = {
       full_name: fullname, 
       email: email, 
