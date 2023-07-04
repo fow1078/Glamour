@@ -8,15 +8,6 @@ import AdminNavigation from '../Components/AdminNavigation';
 import postData from '../../common/postData'
 
 function AdminAddNew() {
-  // const [randomData, setData] = useState('');
-  // useEffect(() => {
-  //   fetch("http://localhost:8080/api/data").then((res) =>
-  //       res.json().then((data) => {
-  //         setData(data.message);
-  //           console.log(data);
-  //       })
-  //   );
-  // }, []);
   // Inputs Control
   // Label
   const [label, setLabel] = useState('');
@@ -88,11 +79,9 @@ function AdminAddNew() {
       images: images,
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes
     }
-    setTimeout(() => {
-      postData("http://localhost:8080/api/data", data)
-    }, 2000)
+    postData("http://localhost:8080/api/data", data);
+    setTimeout(() => { window.location.reload(); }, 1500)
   }
-  
 
   return (
     <>

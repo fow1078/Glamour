@@ -22,6 +22,9 @@ import CheckoutFinal from './Pages/CheckoutFinal';
 
 // Admin Pages
 import AdminAddNew from './Admin Pages/AddNewForm/AddNew';
+import AdminStatistic from './Admin Pages/Statistic/AdminStatistic';
+import AdminEdit from './Admin Pages/Edit/AdminEdit';
+import EditCurrent from './Admin Pages/Edit/EditCurrent';
 
 import Error_page from './Secondary Components/Error_page';
 import Error_pageAdmin from './Secondary Components/Error_pageAdmin';
@@ -70,12 +73,17 @@ const router = createBrowserRouter([
   }, 
   {
     path: 'admin/stats',
-    element: <AdminAddNew />,
+    element: <AdminStatistic />,
     errorElement: <Error_pageAdmin />
   }, 
   {
     path: 'admin/edit',
-    element: <AdminAddNew />,
+    element: <AdminEdit />,
+    errorElement: <Error_pageAdmin />
+  }, 
+  {
+    path: 'admin/edit/:id',
+    element: <EditCurrent />,
     errorElement: <Error_pageAdmin />
   }, 
   {

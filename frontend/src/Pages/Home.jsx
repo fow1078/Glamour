@@ -13,16 +13,21 @@ import { useSelector } from 'react-redux';
 function Home() {
   const { isEnglish } = useSelector((store) => store.lang);
   const [clothesData, setClothesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     fetch("http://localhost:8080/api/send_data").then((res) =>
         res.json().then((data) => { 
           let tmpArr = [];
           data.forEach(item => tmpArr.push(JSON.parse(item)))
           setClothesData(tmpArr);
+          setIsLoading(false);
         })
     );
   }, []);
 
+  if (isLoading) { 
+    return <h2>Loading...</h2>
+  }
   return (
     <>
       <BackgroundVideo />
@@ -32,7 +37,7 @@ function Home() {
         <Container>
           <Row style={{padding: '40px 0'}}>
             {clothesData.map((data) => {
-              return <CatalogItem key={data.name} data={data} />
+              return <CatalogItem key={data.itemID} data={data} />
             })}
           </Row>
           <div style={{width: '100%', textAlign: 'center', marginTop: '60px'}}>

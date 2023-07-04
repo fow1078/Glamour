@@ -371,3 +371,6 @@ li {list-style-type: none;}
     opacity: 1;
   }
 }
+
+
+.edit_remove { width: 10%; height: 100%; background-color: rgb(183 183 183); position: absolute; right: 0; border-bottom-right-radius: 7px; border-top-right-radius: 5px; display: flex; justify-content: center; font-weight: 600; align-items: center; color: #000 !important}

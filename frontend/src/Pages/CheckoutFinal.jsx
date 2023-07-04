@@ -7,10 +7,12 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 function CheckoutFinal() {
   const [orderId, setOrderId] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() =>  {
     fetch("http://localhost:8080/api/send_order_data").then((res) =>
         res.json().then((data) => { 
           setOrderId(JSON.parse(data[data.length - 1]).order_id)
+          setIsLoading(false);
         })
     );
   }, []);
@@ -23,6 +25,10 @@ function CheckoutFinal() {
   const handleClick = () => {
     let url = 'https://instagram.com/glamour.xn';
     window.open(url, '_blank').focus();
+  }
+
+  if (isLoading) { 
+    return <h2>Loading...</h2>
   }
   return (
     <div style={{height: '100vh', width: '100%', backgroundColor: '#000', position: 'fixed', top: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>

@@ -81,12 +81,11 @@ function CheckOut() {
         uah: total_UAH,
         usd: total 
       },
-      cartItems: tmp
+      cart_items: tmp
     }
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-      console.log('keek')
     } else {
       event.preventDefault();
       postData("http://localhost:8080/api/order_data", data);

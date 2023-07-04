@@ -13,12 +13,14 @@ function Catalog() {
   const [sortOption, setSortOption] = useState('');
   const { isUSD } = useSelector((store) => store.curr)
   const [clothesData, setClothesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     fetch("http://localhost:8080/api/send_data").then((res) =>
         res.json().then((data) => { 
           let tmpArr = [];
           data.forEach(item => tmpArr.push(JSON.parse(item)))
           setClothesData(tmpArr);
+          setIsLoading(false);
         })
     );
   }, []);
@@ -88,6 +90,12 @@ function Catalog() {
     window.scrollTo(0, 0);
   }
   scrollToTop();
+
+
+  if (isLoading) { 
+    return <h2>Loading...</h2>
+  }
+
   return (
     <>
       <BackgroundVideo />

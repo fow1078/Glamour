@@ -82,6 +82,7 @@ class Order(db.Model):
     price_USD = db.Column(db.Integer, nullable=False)
     isChecked = db.Column(db.Boolean, nullable=True)
     
+    
     def __init__(self, order_id, email, country, first_name, last_name, address, address_details, city, postal_code, phone_number, price_UAH, price_USD):
         self.order_id = order_id
         self.email = email
