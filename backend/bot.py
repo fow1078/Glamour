@@ -1,7 +1,12 @@
 import telebot
+import requests
+from api import db, bot, TOKEN, Order, Support
 
-from api import db, bot, Order, Support
-from sqlalchemy.event import listens_for
+with open('backend/Pictures/bot_pict.jpeg', 'rb') as photo:
+    response = requests.post(
+        url=f'https://api.telegram.org/bot{TOKEN}/setMyProfilePhoto',
+        files={'photo': photo}
+    )
 
 
 @bot.message_handler(commands=['start'])
@@ -28,11 +33,11 @@ def message(message):
     messages = Order.query.order_by(Order.id).all()
     for msg in messages:
         if msg.isChecked == False:
-            bot.send_message(message.chat.id, f"НОВЕ ЗАМОВЛЕННЯ №{msg.order_id}\n\nКому: {msg.first_name} {msg.last_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\nАдреса: {msg.address}, {msg.address_details}, {msg.city}, {msg.country}, {msg.postal_code}\n\nЦіна: {msg.price_UAH}₴ / {msg.price_USD}$")
+            bot.send_message(message.chat.id, f"НОВЕ ЗАМОВЛЕННЯ №{msg.order_id}\n\nКому: {msg.first_name} {msg.last_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\nАдреса: {msg.address}, {msg.address_details}, {msg.city}, {msg.country}, {msg.postal_code}\n\nЦіна: {msg.price_UAH}₴ / {msg.price_USD}$\nЗамовлення: {msg.items[:-2]} ")
             db.session.query(Order).filter_by(id=msg.id).first().isChecked = True
             db.session.commit()
         else:
-            bot.send_message(message.chat.id, f"СТАРЕ ЗАМОВЛЕННЯ №{msg.order_id}\n\nКому: {msg.first_name} {msg.last_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\nАдреса: {msg.address}, {msg.address_details}, {msg.city}, {msg.country}, {msg.postal_code}\n\nЦіна: {msg.price_UAH}₴ / {msg.price_USD}$")
+            bot.send_message(message.chat.id, f"СТАРЕ ЗАМОВЛЕННЯ №{msg.order_id}\n\nКому: {msg.first_name} {msg.last_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\nАдреса: {msg.address}, {msg.address_details}, {msg.city}, {msg.country}, {msg.postal_code}\n\nЦіна: {msg.price_UAH}₴ / {msg.price_USD}$\nЗамовлення: {msg.items[:-2]}")
 
 
 @bot.message_handler(commands=['orderOld'])
@@ -40,7 +45,7 @@ def message(message):
     messages = Order.query.order_by(Order.id).all()
     for msg in messages:
         if msg.isChecked == True:
-            bot.send_message(message.chat.id, f"СТАРЕ ЗАМОВЛЕННЯ №{msg.order_id}\n\nКому: {msg.first_name} {msg.last_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\nАдреса: {msg.address}, {msg.address_details}, {msg.city}, {msg.country}, {msg.postal_code}\n\nЦіна: {msg.price_UAH}₴ / {msg.price_USD}$")
+            bot.send_message(message.chat.id, f"СТАРЕ ЗАМОВЛЕННЯ №{msg.order_id}\n\nКому: {msg.first_name} {msg.last_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\nАдреса: {msg.address}, {msg.address_details}, {msg.city}, {msg.country}, {msg.postal_code}\n\nЦіна: {msg.price_UAH}₴ / {msg.price_USD}$\nЗамовлення: {msg.items[:-2]}")
 
 
 @bot.message_handler(commands=['orderNew'])
@@ -48,7 +53,7 @@ def message(message):
     messages = Order.query.order_by(Order.id).all()
     for msg in messages:
         if msg.isChecked == False:
-            bot.send_message(message.chat.id, f"НОВЕ ЗАМОВЛЕННЯ №{msg.order_id}\n\nКому: {msg.first_name} {msg.last_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\nАдреса: {msg.address}, {msg.address_details}, {msg.city}, {msg.country}, {msg.postal_code}\n\nЦіна: {msg.price_UAH}₴ / {msg.price_USD}$")
+            bot.send_message(message.chat.id, f"НОВЕ ЗАМОВЛЕННЯ №{msg.order_id}\n\nКому: {msg.first_name} {msg.last_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\nАдреса: {msg.address}, {msg.address_details}, {msg.city}, {msg.country}, {msg.postal_code}\n\nЦіна: {msg.price_UAH}₴ / {msg.price_USD}$\nЗамовлення: {msg.items[:-2]}")
             db.session.query(Order).filter_by(id=msg.id).first().isChecked = True
             db.session.commit()
         
@@ -81,6 +86,6 @@ def message(message):
             bot.send_message(message.chat.id, f"НОВЕ ПОВІДОМЛЕННЯ\n\nВід: {msg.full_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\n\nКоментар: {msg.comment}")
             db.session.query(Support).filter_by(id=msg.id).first().isChecked = True
             db.session.commit()
-    
-
+            
+            
 bot.infinity_polling()

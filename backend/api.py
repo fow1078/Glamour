@@ -80,10 +80,10 @@ class Order(db.Model):
     phone_number = db.Column(db.String(100), nullable=False)
     price_UAH = db.Column(db.Integer, nullable=False)
     price_USD = db.Column(db.Integer, nullable=False)
+    items = db.Column(db.String(1000), nullable=False)
     isChecked = db.Column(db.Boolean, nullable=True)
     
-    
-    def __init__(self, order_id, email, country, first_name, last_name, address, address_details, city, postal_code, phone_number, price_UAH, price_USD):
+    def __init__(self, order_id, email, country, first_name, last_name, address, address_details, city, postal_code, phone_number, price_UAH, price_USD, items):
         self.order_id = order_id
         self.email = email
         self.country = country
@@ -96,6 +96,7 @@ class Order(db.Model):
         self.phone_number = phone_number
         self.price_UAH = price_UAH
         self.price_USD = price_USD
+        self.items = items
         self.isChecked = False
         
     def toJSON(self):
@@ -112,7 +113,8 @@ class Order(db.Model):
             'postal_code': self.postal_code,
             'phone_number': self.phone_number,
             'price_UAH': self.price_UAH,
-            'price_USD': self.price_UAH,
+            'price_USD': self.price_USD,
+            'items': self.items,
             'isChecked': self.isChecked
         }
 
@@ -203,6 +205,10 @@ def order_data():
 
     if request.method == 'POST':
         data = request.get_json()
+        
+        items = ""
+        for i in data['cart_items']:
+            items += i['name'] + ", " + i['size'] + ", " + str(i['amount']) + "; "
             
         order = Order(generate_ID(),
                     data['email'],
@@ -215,7 +221,8 @@ def order_data():
                     data['postal_code'],
                     data['phone_number'],
                     data['price']['uah'],
-                    data['price']['usd'])
+                    data['price']['usd'],
+                    items)
         
         try:
             db.session.add(order)
@@ -267,3 +274,97 @@ def send_support_data():
     for i in data:
         all_data.append(json.dumps(i.toJSON()))
     return all_data
+
+
+@app.route("/api/statistic_delete", methods=['POST', 'OPTIONS', 'GET'])
+def statistic_delete():
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight request successful'})
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        return response
+    
+    if request.method == 'POST':
+        id = request.get_json()
+        order = Order.query.filter_by(id=int(id['id'])).first()
+        db.session.delete(order)
+        i = 0
+        order_edit = Order.query.all()
+        for el in order_edit:
+            i += 1
+            el.id = i
+        db.session.commit()
+        
+    return '200'
+
+
+@app.route("/api/reset_orders", methods=['POST', 'OPTIONS', 'GET'])
+def reset_orders():
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight request successful'})
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        return response
+    
+    if request.method == 'POST':
+        order = Order.query.all()
+        for el in order:
+            db.session.delete(el)
+        db.session.commit()
+    return '200'
+
+
+@app.route("/api/edit_delete", methods=['POST', 'OPTIONS', 'GET'])
+def edit_delete():
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight request successful'})
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        return response
+    
+    if request.method == 'POST':
+        id = request.get_json()
+        item = Item.query.filter_by(id=int(id['id'])).first()
+        db.session.delete(item)
+        i = 0
+        item_edit = Item.query.all()
+        for el in item_edit:
+            i += 1
+            el.id = i
+        db.session.commit()
+    return '200'
+
+
+@app.route("/api/edit_items", methods=['POST', 'OPTIONS', 'GET'])
+def edit_items():
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight request successful'})
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        return response
+    
+    if request.method == 'POST':
+        item_data = request.get_json()
+        item = Item.query.filter_by(id=item_data['id']).first()
+        
+        string_new_sizes = ""
+        for size in item_data['sizes']:
+            string_new_sizes += size
+            string_new_sizes += ", "
+                
+        string_new_images = ""
+        for image in item_data['images']:
+            string_new_images += image
+            string_new_images += ", "
+        
+        item.name = item_data['label']
+        item.price_USD = item_data['price']['usd']
+        item.price_UAH = item_data['price']['uah']
+        item.description = item_data['description_UA']
+        item.description_en = item_data['description_EN']
+        item.slug = item_data['slug']
+        item.sizes = string_new_sizes
+        item.image = string_new_images
+        
+        db.session.commit()
+    return '200'

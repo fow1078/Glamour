@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/esm/Col';
 
 import AdminBg from '../Components/AdminBg';
 import AdminNavigation from '../Components/AdminNavigation';
+import postData from '../../common/postData';
 import Accordion from 'react-bootstrap/Accordion';
 
 
@@ -22,11 +23,18 @@ function AdminStatistic() {
     );
   }, []);
 
-  const handleRemove = (e) => {
+  const handleRemove = (e, itemID) => {
     e.preventDefault();
-    console.log('Removed');
+    postData("http://localhost:8080/api/statistic_delete", {id: itemID});
+    setTimeout(() => { window.location.reload(); }, 1500)
   }
 
+  const handleReset = (e) => {
+    e.preventDefault();
+    postData("http://localhost:8080/api/reset_orders", {});
+    setTimeout(() => { window.location.reload(); }, 1000);
+  }
+  
   if (isLoading) { 
     return <h2>Loading...</h2>
   }
@@ -46,7 +54,7 @@ function AdminStatistic() {
                 <Accordion.Item eventKey={order.order_id}>
                   <Accordion.Header style={{position: 'relative'}}>
                     {order.order_id}
-                    <div className='edit_remove' onClick={handleRemove}>X</div>
+                    <div className='edit_remove' onClick={(e) => {handleRemove(e, order.id)}}>X</div>
                   </Accordion.Header>
                   <Accordion.Body>  
                     <div style={{padding: '20px'}}>
@@ -85,6 +93,9 @@ function AdminStatistic() {
               </Accordion>
             );
           }) : 'There is nothing in here'}
+          <div style={{width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+            <button onClick={handleReset} type='' style={{padding: '10px 25px', backgroundColor: '#fff', color: '#000', border: 'none', borderRadius: '5px', width: '175px'}}>Reset</button>
+          </div>
         </div>
       </Container>
     </>

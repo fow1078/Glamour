@@ -1,5 +1,6 @@
 import os 
 import threading
+import importlib
 from api import app, db
 
 PORT = int(os.environ.get('PORT', 8080))
@@ -8,7 +9,7 @@ def run_flask():
     app.run(port=PORT, debug=False) #Изменить с true на false когда закончим
     
 def run_telebot():
-    os.system('python backend/bot.py')
+    importlib.import_module('bot')
 
 if __name__ == "__main__":
     with app.app_context():         

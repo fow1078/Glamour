@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 
+import postData from '../../common/postData';
 import AdminBg from '../Components/AdminBg';
 import AdminNavigation from '../Components/AdminNavigation';
 
@@ -94,6 +95,7 @@ function EditCurrent() {
   const handleClick = (e) => {
     e.preventDefault();
     const data = {
+      id: itemData.id,
       label: label.trim(),
       price: {
         uah: uah,
@@ -105,16 +107,14 @@ function EditCurrent() {
       images: images,
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes
     }
-    // postData("http://localhost:8080/api/data", data);
-    setTimeout(() => { window.location.reload(); }, 1500)
+    postData("http://localhost:8080/api/edit_items", data);
+    setTimeout(() => { window.location = '/admin/edit'; }, 1500)
   }
 
-  const handleDelete = () => {
-    console.log('delete');
-  }
-
-  const handleUpdate = () => {
-    console.log('update');
+  const handleDelete = (e, id) => {
+    e.preventDefault();
+    postData("http://localhost:8080/api/edit_delete", {id: id});
+    setTimeout(() => { window.location = '/admin/edit'; }, 1000);
   }
 
   return (
@@ -195,21 +195,16 @@ function EditCurrent() {
                   <input multiple type='file' accept="image/*" required onChange={handleImagesChange} className='no-focus' id='item-images' name='item-images' style={{borderRadius: '5px', backgroundColor: '#00000037', border: '2px solid #000', padding: '4px'}} />
                 </div>
               </Col>
-              <Col xs={12} md={6} style={{display: 'flex', alignItems: 'flex-end'}}>
-                <div style={{width: '100%', textAlign: 'end'}}>
-                  <button type='' className='edit_submit' onClick={handleClick} disabled={isImagesLoading ? false : true} style={{padding: '10px 25px', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '5px', width: '100%'}}>Submit</button>
-                </div>
-              </Col>
             </Row>
             <Row style={{marginTop: '10px'}}>
               <Col xs={12} md={6} style={{display: 'flex', alignItems: 'flex-end'}} className='edit_delete_btn'>
                 <div style={{width: '100%', textAlign: 'end'}}>
-                  <button type='' onClick={handleDelete} style={{padding: '10px 25px', backgroundColor: '#620505', color: '#fff', border: 'none', borderRadius: '5px', width: '100%'}}>Delete</button>
+                  <button type='' onClick={(e) => {handleDelete(e, itemData.id)}} style={{padding: '10px 25px', backgroundColor: '#620505', color: '#fff', border: 'none', borderRadius: '5px', width: '100%'}}>Delete</button>
                 </div>
               </Col>
               <Col xs={12} md={6} style={{display: 'flex', alignItems: 'flex-end'}}>
                 <div style={{width: '100%', textAlign: 'end'}}>
-                  <button type='' onClick={handleUpdate} style={{padding: '10px 25px', backgroundColor: '#0b0562', color: '#fff', border: 'none', borderRadius: '5px', width: '100%'}}>Update</button>
+                  <button type='' className='edit_submit' onClick={handleClick} style={{padding: '10px 25px', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '5px', width: '100%'}}>Submit</button>
                 </div>
               </Col>
             </Row>

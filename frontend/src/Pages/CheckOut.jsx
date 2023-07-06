@@ -89,7 +89,9 @@ function CheckOut() {
     } else {
       event.preventDefault();
       postData("http://localhost:8080/api/order_data", data);
-      window.location.replace("/checkout/final");
+      setTimeout(() => {
+        window.location.replace("/checkout/final");
+      }, 2000)
     }
 
     setValidated(true);
