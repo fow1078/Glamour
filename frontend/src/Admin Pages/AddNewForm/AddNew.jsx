@@ -8,6 +8,7 @@ import AdminNavigation from '../Components/AdminNavigation';
 import postData from '../../common/postData'
 
 function AdminAddNew() {
+  const [isImagesLoading, setIsImagesLoading] = useState(false);
   // Inputs Control
   // Label
   const [label, setLabel] = useState('');
@@ -62,7 +63,10 @@ function AdminAddNew() {
       }
       reader.readAsDataURL(file);
     })
-    setImages(tempImageArray)
+    setTimeout(() => {
+      setImages(tempImageArray)
+      setIsImagesLoading(true)
+    }, 2000)
   }
 
   const handleClick = (e) => {
@@ -162,7 +166,7 @@ function AdminAddNew() {
             </Col>
             <Col xs={12} md={6} style={{display: 'flex', alignItems: 'flex-end'}}>
               <div style={{width: '100%', textAlign: 'end'}}>
-                <button type='' onClick={handleClick} style={{padding: '10px 25px', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '5px'}}>Submit</button>
+                <button type='' onClick={handleClick} disabled={isImagesLoading ? false : true} style={{padding: '10px 25px', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '5px'}}>Submit</button>
               </div>
             </Col>
           </Row>

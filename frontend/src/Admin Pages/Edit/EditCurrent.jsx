@@ -10,6 +10,7 @@ import AdminNavigation from '../Components/AdminNavigation';
 
 function EditCurrent() {
   let { state } = useLocation();
+  const [isImagesLoading, setIsImagesLoading] = useState(false);
   let itemData = state.data;
   // Label
   const [label, setLabel] = useState(itemData.name);
@@ -80,7 +81,13 @@ function EditCurrent() {
       }
       reader.readAsDataURL(file);
     })
-    setImages(tempImageArray)
+    setTimeout(() => {
+      const newArr = tempImageArray.concat([...images]);
+      console.log(newArr);
+      setImages(newArr)
+      console.log(tempImageArray);
+      setIsImagesLoading(true)
+    }, 2000)
   }
 
 
@@ -182,7 +189,7 @@ function EditCurrent() {
               </Col>
             </Row>
             <Row>
-              <Col xs={12} md={6}>
+              <Col xs={12} md={6} className='edit_delete_btn' >
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                   <label htmlFor='item-images' style={{fontSize: '18px', fontWeight: '500'}}>Images</label>
                   <input multiple type='file' accept="image/*" required onChange={handleImagesChange} className='no-focus' id='item-images' name='item-images' style={{borderRadius: '5px', backgroundColor: '#00000037', border: '2px solid #000', padding: '4px'}} />
@@ -190,12 +197,12 @@ function EditCurrent() {
               </Col>
               <Col xs={12} md={6} style={{display: 'flex', alignItems: 'flex-end'}}>
                 <div style={{width: '100%', textAlign: 'end'}}>
-                  <button type='' onClick={handleClick} style={{padding: '10px 25px', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '5px', width: '100%'}}>Submit</button>
+                  <button type='' className='edit_submit' onClick={handleClick} disabled={isImagesLoading ? false : true} style={{padding: '10px 25px', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '5px', width: '100%'}}>Submit</button>
                 </div>
               </Col>
             </Row>
             <Row style={{marginTop: '10px'}}>
-              <Col xs={12} md={6} style={{display: 'flex', alignItems: 'flex-end'}}>
+              <Col xs={12} md={6} style={{display: 'flex', alignItems: 'flex-end'}} className='edit_delete_btn'>
                 <div style={{width: '100%', textAlign: 'end'}}>
                   <button type='' onClick={handleDelete} style={{padding: '10px 25px', backgroundColor: '#620505', color: '#fff', border: 'none', borderRadius: '5px', width: '100%'}}>Delete</button>
                 </div>
@@ -213,4 +220,4 @@ function EditCurrent() {
   )
 }
 
-export default EditCurrent
+export default EditCurrent;

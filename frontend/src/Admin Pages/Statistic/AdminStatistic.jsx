@@ -22,6 +22,11 @@ function AdminStatistic() {
     );
   }, []);
 
+  const handleRemove = (e) => {
+    e.preventDefault();
+    console.log('Removed');
+  }
+
   if (isLoading) { 
     return <h2>Loading...</h2>
   }
@@ -39,7 +44,10 @@ function AdminStatistic() {
             return (
               <Accordion key={order.order_id} style={{marginBottom: '20px'}}>
                 <Accordion.Item eventKey={order.order_id}>
-                  <Accordion.Header>{order.order_id}</Accordion.Header>
+                  <Accordion.Header style={{position: 'relative'}}>
+                    {order.order_id}
+                    <div className='edit_remove' onClick={handleRemove}>X</div>
+                  </Accordion.Header>
                   <Accordion.Body>  
                     <div style={{padding: '20px'}}>
                       <Row>

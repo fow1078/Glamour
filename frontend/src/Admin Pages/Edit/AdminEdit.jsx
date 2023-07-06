@@ -22,10 +22,6 @@ function AdminEdit() {
     );
   }, []);
 
-  const handleRemove = (e) => {
-    e.preventDefault();
-    console.log('Removed');
-  }
 
   if (isLoading) { 
     return <h2>Loading...</h2>
@@ -44,7 +40,6 @@ function AdminEdit() {
             clothesData.map((item) => {
               return <Link key={item.itemID} to={'/admin/edit/' + item.itemID} state={{data: item}}><div style={{height: '50px', width: '100%', backgroundColor: '#fff', borderRadius: '7px', padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative', marginBottom: '10px'}}>
                   <div style={{color: '#000'}}>{item.id + '.' + ' ' + item.name}</div>
-                  <div className='edit_remove' onClick={handleRemove}>X</div>
                 </div></Link>
             })
           : 
