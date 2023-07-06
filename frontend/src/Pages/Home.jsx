@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Loading from './Loading';
 
 
 function Home() {
@@ -20,13 +21,15 @@ function Home() {
           let tmpArr = [];
           data.forEach(item => tmpArr.push(JSON.parse(item)))
           setClothesData(tmpArr);
-          setIsLoading(false);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 2000)
         })
     );
   }, []);
 
   if (isLoading) { 
-    return <h2>Loading...</h2>
+    return <Loading />;
   }
   return (
     <>

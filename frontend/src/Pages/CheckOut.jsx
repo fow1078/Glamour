@@ -91,11 +91,18 @@ function CheckOut() {
       postData("http://localhost:8080/api/order_data", data);
       setTimeout(() => {
         window.location.replace("/checkout/final");
-      }, 2000)
+      }, 1000)
     }
 
     setValidated(true);
   };  
+
+  useEffect(() => {
+    function scrollToTop() {
+      window.scrollTo(0, 0);
+    }
+    scrollToTop();
+  }, []);
 
   return (
     <>

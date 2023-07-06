@@ -384,3 +384,18 @@ li {list-style-type: none;}
 .edit_submit:disabled {
   background-color: #898989 !important;
 }
+
+.tg-btn {color: #2d2c2c}
+.tg-btn:hover {color: #000000}
+
+/* .loading {animation: loading 0.5s forwards 1.5s;}
+
+@keyframes loading {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+} */

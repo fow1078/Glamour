@@ -8,6 +8,8 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import { useSelector } from 'react-redux';
+import Loading from './Loading';
+
 
 function Catalog() {
   const [sortOption, setSortOption] = useState('');
@@ -89,11 +91,12 @@ function Catalog() {
   function scrollToTop() {
     window.scrollTo(0, 0);
   }
-  scrollToTop();
-
+  useEffect(() => {
+    scrollToTop();
+  }, [])
 
   if (isLoading) { 
-    return <h2>Loading...</h2>
+    return <Loading />
   }
 
   return (

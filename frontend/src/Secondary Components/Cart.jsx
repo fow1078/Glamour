@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal, closeModal } from '../features/Modal/modalSlice';
-import { ChevronUp, ChevronDown } from '../icons';
+import { closeModal } from '../features/Modal/modalSlice';
 import CartItem from './CartItem';
 import { clearCart } from '../features/Cart/cartSlice';
 
@@ -54,7 +53,7 @@ function Cart() {
               <Link to='/checkout' onClick={handleClick}><button className='checkout-btn'>Checkout</button></Link>
             </div>
             <div style={{padding: '5px', width: '100%'}}>
-              <button className='clear-btn'  >{isEnglish ? 'Clear' : 'Очистити'}</button>
+              <button className='clear-btn' onClick={() => {dispatch(clearCart())}} >{isEnglish ? 'Clear' : 'Очистити'}</button>
             </div>
           </div>
         </footer>

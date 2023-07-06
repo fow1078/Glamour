@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/esm/Col';
 import AdminBg from '../Components/AdminBg';
 import AdminNavigation from '../Components/AdminNavigation';
 import { Link } from 'react-router-dom';
+import Loading from '../../Pages/Loading';
 
 
 function AdminEdit() {
@@ -24,7 +25,7 @@ function AdminEdit() {
 
 
   if (isLoading) { 
-    return <h2>Loading...</h2>
+    return <Loading />; 
   }
 
   return (
@@ -38,7 +39,7 @@ function AdminEdit() {
         <div style={{padding: '40px 0'}}>
           {Array.isArray(clothesData) ? 
             clothesData.map((item) => {
-              return <Link key={item.itemID} to={'/admin/edit/' + item.itemID} state={{data: item}}><div style={{height: '50px', width: '100%', backgroundColor: '#fff', borderRadius: '7px', padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative', marginBottom: '10px'}}>
+              return <Link key={item.itemID} to={'/z8d6Ta3H49iJb3S9AR6XtTpb/edit/' + item.itemID} state={{data: item}}><div style={{height: '50px', width: '100%', backgroundColor: '#fff', borderRadius: '7px', padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative', marginBottom: '10px'}}>
                   <div style={{color: '#000'}}>{item.id + '.' + ' ' + item.name}</div>
                 </div></Link>
             })

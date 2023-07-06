@@ -28,6 +28,15 @@ function Item() {
   }
   const tmpSizes = itemData.sizes.split(', ');
   tmpSizes.pop();
+  const tmpImages = itemData.image.split(', ');
+  tmpImages.pop();
+
+  function scrollToTop() {
+    window.scrollTo(0, 0);
+  }
+  useEffect(() => {
+    scrollToTop();
+  }, [])
   return (
     <>
       <BackgroundVideo />
@@ -37,7 +46,7 @@ function Item() {
         <Container style={{padding: '80px 20px'}}>
           <Row>
             <Col xs={{span: 12}} md={{span: 5, offset: 0}}>
-              <ItemGallery images={itemData.image.split(', ')} />          
+              <ItemGallery images={tmpImages} />          
             </Col>
             <Col xs={{span: 12}} md={{span: 6, offset: 1}} style={{margin: 'auto'}}>
               <div style={{width: '100%', display: 'flex', flexDirection: 'column',}}>

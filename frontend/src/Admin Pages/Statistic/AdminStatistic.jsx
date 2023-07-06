@@ -7,6 +7,7 @@ import AdminBg from '../Components/AdminBg';
 import AdminNavigation from '../Components/AdminNavigation';
 import postData from '../../common/postData';
 import Accordion from 'react-bootstrap/Accordion';
+import Loading from '../../Pages/Loading';
 
 
 function AdminStatistic() {
@@ -25,18 +26,25 @@ function AdminStatistic() {
 
   const handleRemove = (e, itemID) => {
     e.preventDefault();
+    e.stopPropagation();
     postData("http://localhost:8080/api/statistic_delete", {id: itemID});
-    setTimeout(() => { window.location.reload(); }, 1500)
+    setTimeout(() => { window.location.reload(); }, 500)
   }
 
   const handleReset = (e) => {
     e.preventDefault();
     postData("http://localhost:8080/api/reset_orders", {});
-    setTimeout(() => { window.location.reload(); }, 1000);
+    setTimeout(() => { window.location.reload(); }, 500);
   }
-  
+
+  const generateOrderCart = (order) => {
+    const tmpCartItems = order.items.split('; ');
+    tmpCartItems.pop();
+    return tmpCartItems;
+  }
+
   if (isLoading) { 
-    return <h2>Loading...</h2>
+    return <Loading />;
   }
   return (
     <>
@@ -81,7 +89,19 @@ function AdminStatistic() {
                         <Col xs={12} lg={4} style={{marginBottom: '20px'}}>
                           <h6>Order Details:</h6>
                           <ul style={{paddingLeft: '20px'}}>
-                            <li style={{listStyleType: 'circle', fontSize: '14px'}}>Cart Items</li>
+                            <li style={{listStyleType: 'circle', fontSize: '14px'}}>
+                              Cart Items: 
+                              <br />
+                              <ul style={{paddingLeft: '20px'}}>
+                                {generateOrderCart(order).map((item, ind) => {
+                                  return (
+                                    <li key={ind} style={{listStyleType: 'disc'}}>
+                                      <p style={{fontSize: '12px'}}>{item}</p>
+                                    </li>
+                                  )
+                                })}
+                              </ul>
+                            </li>
                             <li style={{listStyleType: 'circle', fontSize: '14px'}}>Price UAH: {order.price_UAH}₴</li>
                             <li style={{listStyleType: 'circle', fontSize: '14px'}}>Price USD: {order.price_USD}$</li>
                           </ul>

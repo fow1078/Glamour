@@ -4,6 +4,8 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import Loading from './Loading';
+
 
 function CheckoutFinal() {
   const [orderId, setOrderId] = useState('');
@@ -16,6 +18,7 @@ function CheckoutFinal() {
         })
     );
   }, []);
+  
   useEffect(() => {
     setTimeout(() => {
       window.location.reload();    
@@ -28,7 +31,7 @@ function CheckoutFinal() {
   }
 
   if (isLoading) { 
-    return <h2>Loading...</h2>
+    return <Loading />
   }
   return (
     <div style={{height: '100vh', width: '100%', backgroundColor: '#000', position: 'fixed', top: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>

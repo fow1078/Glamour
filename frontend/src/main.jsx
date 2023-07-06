@@ -67,22 +67,22 @@ const router = createBrowserRouter([
 
   }, 
   {
-    path: 'admin/add-new',
+    path: 'z8d6Ta3H49iJb3S9AR6XtTpb/add-new',
     element: <AdminAddNew />,
     errorElement: <Error_pageAdmin />
   }, 
   {
-    path: 'admin/stats',
+    path: 'z8d6Ta3H49iJb3S9AR6XtTpb/stats',
     element: <AdminStatistic />,
     errorElement: <Error_pageAdmin />
   }, 
   {
-    path: 'admin/edit',
+    path: 'z8d6Ta3H49iJb3S9AR6XtTpb/edit',
     element: <AdminEdit />,
     errorElement: <Error_pageAdmin />
   }, 
   {
-    path: 'admin/edit/:id',
+    path: 'z8d6Ta3H49iJb3S9AR6XtTpb/edit/:id',
     element: <EditCurrent />,
     errorElement: <Error_pageAdmin />
   }, 

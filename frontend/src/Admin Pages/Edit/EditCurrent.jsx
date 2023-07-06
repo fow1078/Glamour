@@ -83,11 +83,8 @@ function EditCurrent() {
       reader.readAsDataURL(file);
     })
     setTimeout(() => {
-      const newArr = tempImageArray.concat([...images]);
-      console.log(newArr);
-      setImages(newArr)
-      console.log(tempImageArray);
-      setIsImagesLoading(true)
+      setImages(tempImageArray);
+      setIsImagesLoading(true);
     }, 2000)
   }
 
@@ -108,13 +105,13 @@ function EditCurrent() {
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes
     }
     postData("http://localhost:8080/api/edit_items", data);
-    setTimeout(() => { window.location = '/admin/edit'; }, 1500)
+    setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500)
   }
 
   const handleDelete = (e, id) => {
     e.preventDefault();
     postData("http://localhost:8080/api/edit_delete", {id: id});
-    setTimeout(() => { window.location = '/admin/edit'; }, 1000);
+    setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500);
   }
 
   return (
