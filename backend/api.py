@@ -385,12 +385,12 @@ def edit_items():
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
-@app.route(['/contact', '/z8d6Ta3H49iJb3S9AR6XtTpb/add-new', 'catalog'])
+@app.route('/contact', '/z8d6Ta3H49iJb3S9AR6XtTpb/add-new', '/catalog')
 @cross_origin()
 def contact(): 
     return send_from_directory(app.static_folder, 'index.html')
 
-@app.route()
-@cross_origin()
-def add_new(): 
-    return send_from_directory(app.static_folder, 'index.html')
+# @app.route()
+# @cross_origin()
+# def add_new(): 
+#     return send_from_directory(app.static_folder, 'index.html')
