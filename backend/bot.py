@@ -68,7 +68,7 @@ def message(message):
 
 @bot.message_handler(commands=['supportOld'])
 def message(message):
-    messages = json(requests.get('https://glamour-42ebc6e636b8.herokuapp.com/api/send_telegram_support_data'))
+    messages = requests.get('https://glamour-42ebc6e636b8.herokuapp.com/api/send_telegram_support_data').json()
     for msg in messages:
         msg = json.loads(msg)
         if msg['isChecked'] == True:
