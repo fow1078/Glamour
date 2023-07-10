@@ -389,3 +389,8 @@ def serve():
 @cross_origin()
 def contact(): 
     return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/add-new')
+@cross_origin()
+def add_new(): 
+    return send_from_directory(app.static_folder, 'index.html')
