@@ -91,6 +91,7 @@ def message(message):
             bot.send_message(message.chat.id, f"НОВЕ ПОВІДОМЛЕННЯ\n\nВід: {msg.full_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\n\nКоментар: {msg.comment}")
             db.session.query(Support).filter_by(id=msg.id).first().isChecked = True
             db.session.commit()
+            print(f"НОВЕ ПОВІДОМЛЕННЯ\n\nВід: {msg.full_name}\nE-mail: {msg.email}\nНомер телефону: {msg.phone_number}\n\nКоментар: {msg.comment}")
             
             
 bot.infinity_polling()
