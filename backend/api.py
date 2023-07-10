@@ -10,7 +10,7 @@ from backend.functions import generate_ID
 TOKEN = '5862336139:AAGIhDXjNIOwzr-usk1VNOQgCbEJZ4mmJxM'
 chat_id = 0
 
-app = Flask(__name__, static_folder="../frontend/dist", static_url_path="")
+app = Flask(__name__, static_folder="../dist", static_url_path="")
 cors = CORS(app)
 bot = telebot.TeleBot(TOKEN)
 
