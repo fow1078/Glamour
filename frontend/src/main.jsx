@@ -34,39 +34,41 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
-    errorElement: <Error_page />
+    errorElement: <Error_page />,
+    children: [
+      {
+        path: "catalog",
+        element: <Catalog />,
+        errorElement: <Error_page />
+      },
+      {
+        path: "contact",
+        element: <Contact />,
+        errorElement: <Error_page />
+      },
+      {
+        path: "catalog/:id",
+        element: <Item />,
+        errorElement: <Error_page />
+      },
+      {
+        path: '/payment',
+        element: <Payment />,
+        errorElement: <Error_page />
+      }, 
+      {
+        path: '/exchange', 
+        element: <Exchange />,
+        errorElement: <Error_page />
+      }, 
+      {
+        path: '/privacy-policy', 
+        element: <PrivacyPolicy />,
+        errorElement: <Error_page />
+    
+      }
+    ],
   },
-  {
-    path: '/catalog/:id',
-    element: <Item />,
-    errorElement: <Error_page />
-  },
-  {
-    path: '/catalog',
-    element: <Catalog />,
-    errorElement: <Error_page />
-  },
-  {
-    path: '/contact',
-    element: <Contact />,
-    errorElement: <Error_page />
-  },
-  {
-    path: '/payment',
-    element: <Payment />,
-    errorElement: <Error_page />
-  }, 
-  {
-    path: '/exchange', 
-    element: <Exchange />,
-    errorElement: <Error_page />
-  }, 
-  {
-    path: '/privacy-policy', 
-    element: <PrivacyPolicy />,
-    errorElement: <Error_page />
-
-  }, 
   {
     path: '/z8d6Ta3H49iJb3S9AR6XtTpb/add-new',
     element: <AdminAddNew />,
