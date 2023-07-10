@@ -1,7 +1,7 @@
 import json
 import telebot
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
 from flask.helpers import send_from_directory
 from flask_sqlalchemy import SQLAlchemy
@@ -380,8 +380,12 @@ def edit_items():
     return '200'
         
         
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/')
 @cross_origin()
-def serve(path):
+def serve():
     return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/contact')
+@cross_origin()
+def contact(): 
+    return render_template('index.html')
