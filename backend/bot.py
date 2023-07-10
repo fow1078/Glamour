@@ -28,6 +28,7 @@ def message(message):
 @bot.message_handler(commands=['clearSupports'])
 def message(message):
     requests.post('https://glamour-42ebc6e636b8.herokuapp.com/api/reset_support')
+    bot.send_message(message.chat.id, "Відгуки та коментарі очищені!")
     
     
 @bot.message_handler(commands=['orderAll'])
