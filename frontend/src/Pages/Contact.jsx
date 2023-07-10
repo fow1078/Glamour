@@ -45,15 +45,15 @@ function Contact() {
   }
 
   const handleSubmit = (e) => {
+    e.preventDefault()
     const data = {
       full_name: fullname, 
       email: email, 
       phone_number: number, 
       comment: comment
     }
-    setTimeout(() => {
-      postData("https://glamour-42ebc6e636b8.herokuapp.com/api/support_data", data)
-    }, 2000)
+    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/support_data", data)
+    setTimeout(() => { window.location.reload(); }, 500)
   }
   return (
     <>
