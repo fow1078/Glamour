@@ -1,16 +1,16 @@
 import json
 import telebot
 
-from flask import Flask, jsonify
-from functions import generate_ID
-from flask import request
-from flask_cors import CORS
+from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
+from flask.helpers import send_from_directory
 from flask_sqlalchemy import SQLAlchemy
+from backend.functions import generate_ID
 
 TOKEN = '5862336139:AAGIhDXjNIOwzr-usk1VNOQgCbEJZ4mmJxM'
 chat_id = 0
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../frontend/dist", static_url_path="")
 cors = CORS(app)
 bot = telebot.TeleBot(TOKEN)
 
@@ -147,6 +147,7 @@ class Support(db.Model):
 
 
 @app.route('/api/data', methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def data():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight request successful'})
@@ -187,6 +188,7 @@ def data():
         
 
 @app.route("/api/send_data", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def send_data():
     all_data = []
     data = Item.query.order_by(Item.id).all()
@@ -196,6 +198,7 @@ def send_data():
 
 
 @app.route('/api/order_data', methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def order_data():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight request successful'})
@@ -234,6 +237,7 @@ def order_data():
         
         
 @app.route("/api/send_order_data", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def send_order_data():
     all_data = []
     data = Order.query.order_by(Order.id).all()
@@ -243,6 +247,7 @@ def send_order_data():
 
 
 @app.route('/api/support_data', methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def support_data():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight request successful'})
@@ -268,6 +273,7 @@ def support_data():
         
         
 @app.route("/api/send_support_data", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def send_support_data():
     all_data = []
     data = Support.query.order_by(Support.id).all()
@@ -277,6 +283,7 @@ def send_support_data():
 
 
 @app.route("/api/statistic_delete", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def statistic_delete():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight request successful'})
@@ -299,6 +306,7 @@ def statistic_delete():
 
 
 @app.route("/api/reset_orders", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def reset_orders():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight request successful'})
@@ -315,6 +323,7 @@ def reset_orders():
 
 
 @app.route("/api/edit_delete", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def edit_delete():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight request successful'})
@@ -336,6 +345,7 @@ def edit_delete():
 
 
 @app.route("/api/edit_items", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
 def edit_items():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight request successful'})
@@ -368,3 +378,9 @@ def edit_items():
         
         db.session.commit()
     return '200'
+        
+        
+@app.route('/')
+@cross_origin()
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')

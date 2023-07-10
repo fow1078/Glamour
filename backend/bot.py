@@ -1,6 +1,6 @@
 import telebot
 import requests
-from api import db, bot, TOKEN, Order, Support
+from backend.api import db, bot, TOKEN, Order, Support
 
 with open('backend/Pictures/bot_pict.jpeg', 'rb') as photo:
     response = requests.post(
