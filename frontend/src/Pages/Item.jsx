@@ -11,7 +11,7 @@ import Footer from '../Header_Navs_Footer/Footer';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../features/Cart/cartSlice'
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 function Item() {
