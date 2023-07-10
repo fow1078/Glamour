@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "proxy": "https://glamour-42ebc6e636b8.herokuapp.com/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
