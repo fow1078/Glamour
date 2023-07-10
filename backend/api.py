@@ -1,11 +1,11 @@
 import json
 import telebot
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from flask.helpers import send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-from backend.functions import generate_ID
+from backend.functions import generate_ID, return_db_data, return_telegram_db_data
 
 TOKEN = '5862336139:AAGIhDXjNIOwzr-usk1VNOQgCbEJZ4mmJxM'
 chat_id = 0
@@ -82,6 +82,7 @@ class Order(db.Model):
     price_USD = db.Column(db.Integer, nullable=False)
     items = db.Column(db.String(1000), nullable=False)
     isChecked = db.Column(db.Boolean, nullable=True)
+    isChecked_count = db.Column(db.Integer, nullable=False)
     
     def __init__(self, order_id, email, country, first_name, last_name, address, address_details, city, postal_code, phone_number, price_UAH, price_USD, items):
         self.order_id = order_id
@@ -97,7 +98,8 @@ class Order(db.Model):
         self.price_UAH = price_UAH
         self.price_USD = price_USD
         self.items = items
-        self.isChecked = False
+        self.isChecked = True
+        self.isChecked_count = 0
         
     def toJSON(self):
         return {
@@ -115,7 +117,8 @@ class Order(db.Model):
             'price_UAH': self.price_UAH,
             'price_USD': self.price_USD,
             'items': self.items,
-            'isChecked': self.isChecked
+            'isChecked': self.isChecked,
+            'isChecked_count': self.isChecked_count
         }
 
 class Support(db.Model):
@@ -128,13 +131,15 @@ class Support(db.Model):
     phone_number = db.Column(db.String(100), nullable=False)
     comment = db.Column(db.String(100000), nullable=False)
     isChecked = db.Column(db.Boolean, nullable=True)
+    isChecked_count = db.Column(db.Integer, nullable=False)
     
     def __init__(self, full_name, email, phone_number, comment):
         self.full_name = full_name
         self.email = email
         self.phone_number = phone_number
         self.comment = comment
-        self.isChecked = False
+        self.isChecked = True
+        self.isChecked_count = 0
         
     def toJSON(self):
         return {
@@ -142,7 +147,8 @@ class Support(db.Model):
             'email': self.email,
             'phone_number': self.phone_number,
             'comment': self.comment,
-            'isChecked': self.isChecked
+            'isChecked': self.isChecked,
+            'isChecked_count': self.isChecked_count
         }
 
 
@@ -190,11 +196,7 @@ def data():
 @app.route("/api/send_data", methods=['POST', 'OPTIONS', 'GET'])
 @cross_origin()
 def send_data():
-    all_data = []
-    data = Item.query.order_by(Item.id).all()
-    for i in data:
-        all_data.append(json.dumps(i.toJSON()))
-    return all_data
+    return return_db_data(Item)
 
 
 @app.route('/api/order_data', methods=['POST', 'OPTIONS', 'GET'])
@@ -239,11 +241,13 @@ def order_data():
 @app.route("/api/send_order_data", methods=['POST', 'OPTIONS', 'GET'])
 @cross_origin()
 def send_order_data():
-    all_data = []
-    data = Order.query.order_by(Order.id).all()
-    for i in data:
-        all_data.append(json.dumps(i.toJSON()))
-    return all_data
+    return return_db_data(Order)
+
+
+@app.route("/api/send_telegram_order_data", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
+def send_telegram_order_data():
+    return return_telegram_db_data(Order, db)
 
 
 @app.route('/api/support_data', methods=['POST', 'OPTIONS', 'GET'])
@@ -275,11 +279,13 @@ def support_data():
 @app.route("/api/send_support_data", methods=['POST', 'OPTIONS', 'GET'])
 @cross_origin()
 def send_support_data():
-    all_data = []
-    data = Support.query.order_by(Support.id).all()
-    for i in data:
-        all_data.append(json.dumps(i.toJSON()))
-    return all_data
+    return return_db_data(Support)
+
+
+@app.route("/api/send_telegram_support_data", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
+def send_telegram_support_data():
+    return return_telegram_db_data(Support, db)
 
 
 @app.route("/api/statistic_delete", methods=['POST', 'OPTIONS', 'GET'])
