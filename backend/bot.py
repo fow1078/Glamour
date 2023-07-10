@@ -13,7 +13,7 @@ def message(message):
 
 @bot.message_handler(commands=['help'])
 def message(message):
-    bot.send_message(message.chat.id, "КОМАНДИ\n\n\'/help\' - передивитися всі команди\n\'/clear\' - очистити чат\n\'/orderAll\' - передивитися всі замовлення\n\'/orderOld\' - передивитися старі замовлення\n\'/orderNew\' - передивитися нові замовлення\n\'/supportAll\' - передивитися всі відгуки та коментарі\n\'/supportOld\' - передивитися старі відгуки та коментарі\n\'/supportNew\' - передивитися нові відгуки та коментарі\n")
+    bot.send_message(message.chat.id, "КОМАНДИ\n\n\'/help\' - передивитися всі команди\n\'/clear\' - очистити чат\n\'/orderAll\' - передивитися всі замовлення\n\'/orderOld\' - передивитися старі замовлення\n\'/orderNew\' - передивитися нові замовлення\n\'/supportAll\' - передивитися всі відгуки та коментарі\n\'/supportOld\' - передивитися старі відгуки та коментарі\n\'/supportNew\' - передивитися нові відгуки та коментарі\n\'/clearSupports\' - очистити всі відгуки та коментарі\n")
     
 
 @bot.message_handler(commands=['clear'])

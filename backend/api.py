@@ -353,7 +353,7 @@ def reset_orders():
 
 @app.route("/api/reset_support", methods=['POST', 'OPTIONS', 'GET'])
 @cross_origin()
-def reset_orders():
+def reset_supports():
     if request.method == 'OPTIONS':
         response = jsonify({'message': 'CORS preflight request successful'})
         response.headers.add('Access-Control-Allow-Methods', 'POST')
