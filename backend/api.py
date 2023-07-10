@@ -385,12 +385,62 @@ def edit_items():
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
-@app.route('/contact', '/z8d6Ta3H49iJb3S9AR6XtTpb/add-new', '/catalog')
+@app.route('/catalog')
+@cross_origin()
+def catalog(): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/catalog/<id>')
+@cross_origin()
+def catalog_id(id): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/contact')
 @cross_origin()
 def contact(): 
     return send_from_directory(app.static_folder, 'index.html')
 
-# @app.route()
-# @cross_origin()
-# def add_new(): 
-#     return send_from_directory(app.static_folder, 'index.html')
+@app.route('/payment')
+@cross_origin()
+def payment(): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/exchange')
+@cross_origin()
+def exchange(): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/privacy-policy')
+@cross_origin()
+def privacy_policy(): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/add-new')
+@cross_origin()
+def add_new(): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/stats')
+@cross_origin()
+def stats(): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/edit')
+@cross_origin()
+def edit(): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/edit/<id>')
+@cross_origin()
+def edit_id(id): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/checkout')
+@cross_origin()
+def checkout(): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/checkout/final')
+@cross_origin()
+def checkout_final(): 
+    return send_from_directory(app.static_folder, 'index.html')
