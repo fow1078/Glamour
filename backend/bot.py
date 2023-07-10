@@ -2,6 +2,7 @@ import telebot
 import requests
 import json
 
+
 TOKEN = '5862336139:AAGIhDXjNIOwzr-usk1VNOQgCbEJZ4mmJxM'
 bot = telebot.TeleBot(TOKEN)
 
@@ -67,7 +68,7 @@ def message(message):
 
 @bot.message_handler(commands=['supportOld'])
 def message(message):
-    messages = requests.get('https://glamour-42ebc6e636b8.herokuapp.com/api/send_telegram_support_data').json()
+    messages = json(requests.get('https://glamour-42ebc6e636b8.herokuapp.com/api/send_telegram_support_data'))
     for msg in messages:
         msg = json.loads(msg)
         if msg['isChecked'] == True:
