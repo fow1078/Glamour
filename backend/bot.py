@@ -2,7 +2,6 @@ import telebot
 import requests
 import json
 
-
 TOKEN = '5862336139:AAGIhDXjNIOwzr-usk1VNOQgCbEJZ4mmJxM'
 bot = telebot.TeleBot(TOKEN)
 
@@ -24,6 +23,11 @@ def message(message):
             bot.delete_message(message.chat.id, i)
         except telebot.apihelper.ApiException:
             pass
+        
+        
+@bot.message_handler(commands=['clearSupports'])
+def message(message):
+    requests.post('https://glamour-42ebc6e636b8.herokuapp.com/api/reset_support')
     
     
 @bot.message_handler(commands=['orderAll'])

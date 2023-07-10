@@ -351,6 +351,23 @@ def reset_orders():
     return '200'
 
 
+@app.route("/api/reset_support", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
+def reset_orders():
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight request successful'})
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        return response
+    
+    if request.method == 'POST':
+        support = Support.query.all()
+        for el in support:
+            db.session.delete(el)
+        db.session.commit()
+    return '200'
+
+
 @app.route("/api/edit_delete", methods=['POST', 'OPTIONS', 'GET'])
 @cross_origin()
 def edit_delete():
