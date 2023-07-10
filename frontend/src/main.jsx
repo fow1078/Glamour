@@ -37,63 +37,63 @@ const router = createBrowserRouter([
     errorElement: <Error_page />
   },
   {
-    path: 'catalog/:id',
+    path: '/catalog/:id',
     element: <Item />,
     errorElement: <Error_page />
   },
   {
-    path: 'catalog',
+    path: '/catalog',
     element: <Catalog />,
     errorElement: <Error_page />
   },
   {
-    path: 'contact',
+    path: '/contact',
     element: <Contact />,
     errorElement: <Error_page />
   },
   {
-    path: 'payment',
+    path: '/payment',
     element: <Payment />,
     errorElement: <Error_page />
   }, 
   {
-    path: 'exchange', 
+    path: '/exchange', 
     element: <Exchange />,
     errorElement: <Error_page />
   }, 
   {
-    path: 'privacy-policy', 
+    path: '/privacy-policy', 
     element: <PrivacyPolicy />,
     errorElement: <Error_page />
 
   }, 
   {
-    path: 'z8d6Ta3H49iJb3S9AR6XtTpb/add-new',
+    path: '/z8d6Ta3H49iJb3S9AR6XtTpb/add-new',
     element: <AdminAddNew />,
     errorElement: <Error_pageAdmin />
   }, 
   {
-    path: 'z8d6Ta3H49iJb3S9AR6XtTpb/stats',
+    path: '/z8d6Ta3H49iJb3S9AR6XtTpb/stats',
     element: <AdminStatistic />,
     errorElement: <Error_pageAdmin />
   }, 
   {
-    path: 'z8d6Ta3H49iJb3S9AR6XtTpb/edit',
+    path: '/z8d6Ta3H49iJb3S9AR6XtTpb/edit',
     element: <AdminEdit />,
     errorElement: <Error_pageAdmin />
   }, 
   {
-    path: 'z8d6Ta3H49iJb3S9AR6XtTpb/edit/:id',
+    path: '/z8d6Ta3H49iJb3S9AR6XtTpb/edit/:id',
     element: <EditCurrent />,
     errorElement: <Error_pageAdmin />
   }, 
   {
-    path: 'checkout',
+    path: '/checkout',
     element: <CheckOut />,
     errorElement: <Error_page />
   },
   {
-    path: 'checkout/final',
+    path: '/checkout/final',
     element: <CheckoutFinal />,
     errorElement: <Error_page />
   }
