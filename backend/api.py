@@ -388,7 +388,6 @@ def edit_items():
         
 @app.route('/')
 @app.route('/catalog')
-@app.route('/catalog/<id>')
 @app.route('/contact')
 @app.route('/payment')
 @app.route('/exchange')
@@ -396,9 +395,15 @@ def edit_items():
 @app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/add-new')
 @app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/stats')
 @app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/edit')
-@app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/edit/<id>')
 @app.route('/checkout')
 @app.route('/checkout/final')
 @cross_origin()
-def checkout_final(): 
+def routes(): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+
+@app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/edit/<id>')
+@app.route('/catalog/<id>')
+@cross_origin()
+def routes_id(id): 
     return send_from_directory(app.static_folder, 'index.html')
