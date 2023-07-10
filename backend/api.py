@@ -388,4 +388,4 @@ def serve():
 @app.route('/contact')
 @cross_origin()
 def contact(): 
-    return render_template('index.html')
+    return send_from_directory(app.static_folder, 'index.html')
