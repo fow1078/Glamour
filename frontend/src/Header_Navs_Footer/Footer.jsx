@@ -20,7 +20,7 @@ function Footer() {
         <h5 style={{color: '#fff', fontWeight: 500, textAlign: 'center', marginBottom: '15px'}}>{isEnglish ? 'Additional Links' : 'Додаткові посилання'}</h5>
         <Col lg={{span: 6, offset: 3}} style={{marginBottom: '20px'}} >
           <ul className='flex-column flex-lg-row' style={{display: 'flex', justifyContent: 'space-evenly', alignItems: 'center'}}>
-            <li><Link to="/z8d6Ta3H49iJb3S9AR6XtTpb/add-new" style={{fontWeight: 400, fontSize: '12px'}}>{isEnglish ? 'Payment and Delivery' : 'Оплата та Доставка'}</Link></li>
+            <li><Link to="/payment" style={{fontWeight: 400, fontSize: '12px'}}>{isEnglish ? 'Payment and Delivery' : 'Оплата та Доставка'}</Link></li>
             <li><Link to="/privacy-policy" state={{lang: isEnglish}} style={{fontWeight: 400, fontSize: '12px'}}>{isEnglish ? 'Privacy Policy' : 'Політика Конфіденційності'}</Link></li>
             <li><Link to="/exchange" style={{fontWeight: 400, fontSize: '12px'}}>{isEnglish ? 'Exchange and Refund' : 'Обмін та Повернення'}</Link></li>
           </ul>
