@@ -33,7 +33,7 @@ function AdminStatistic() {
 
   const handleReset = (e) => {
     e.preventDefault();
-    postData("http://localhost:8080/api/reset_orders", {});
+    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/reset_orders", {});
     setTimeout(() => { window.location.reload(); }, 500);
   }
 

@@ -104,13 +104,13 @@ function EditCurrent() {
       images: images,
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes
     }
-    postData("http://localhost:8080/api/edit_items", data);
+    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/edit_items", data);
     setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500)
   }
 
   const handleDelete = (e, id) => {
     e.preventDefault();
-    postData("http://localhost:8080/api/edit_delete", {id: id});
+    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/edit_delete", {id: id});
     setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500);
   }
 

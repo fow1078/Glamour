@@ -88,7 +88,7 @@ function CheckOut() {
       event.stopPropagation();
     } else {
       event.preventDefault();
-      postData("http://localhost:8080/api/order_data", data);
+      postData("https://glamour-42ebc6e636b8.herokuapp.com/api/order_data", data);
       setTimeout(() => {
         window.location.replace("/checkout/final");
       }, 1000)

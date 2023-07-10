@@ -17,7 +17,7 @@ function Catalog() {
   const [clothesData, setClothesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:8080/api/send_data").then((res) =>
+    fetch("https://glamour-42ebc6e636b8.herokuapp.com/api/send_data").then((res) =>
         res.json().then((data) => { 
           let tmpArr = [];
           data.forEach(item => tmpArr.push(JSON.parse(item)))

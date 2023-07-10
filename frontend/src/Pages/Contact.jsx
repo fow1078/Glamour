@@ -52,7 +52,7 @@ function Contact() {
       comment: comment
     }
     setTimeout(() => {
-      postData("http://localhost:8080/api/support_data", data)
+      postData("https://glamour-42ebc6e636b8.herokuapp.com/api/support_data", data)
     }, 2000)
   }
   return (

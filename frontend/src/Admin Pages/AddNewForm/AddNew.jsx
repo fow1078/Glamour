@@ -83,7 +83,7 @@ function AdminAddNew() {
       images: images,
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes
     }
-    postData("http://localhost:8080/api/data", data);
+    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/data", data);
     setTimeout(() => { window.location.reload(); }, 1000);
   }
 
