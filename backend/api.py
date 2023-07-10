@@ -380,7 +380,8 @@ def edit_items():
     return '200'
         
         
-@app.route('/')
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
 @cross_origin()
-def serve():
+def serve(path):
     return send_from_directory(app.static_folder, 'index.html')
