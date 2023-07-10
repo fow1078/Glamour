@@ -1,18 +1,13 @@
 import json
-import telebot
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from flask.helpers import send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-from backend.functions import generate_ID, return_db_data, return_telegram_db_data
-
-TOKEN = '5862336139:AAGIhDXjNIOwzr-usk1VNOQgCbEJZ4mmJxM'
-chat_id = 0
+from backend.functions import generate_ID
 
 app = Flask(__name__, static_folder="../dist", static_url_path="")
 cors = CORS(app)
-bot = telebot.TeleBot(TOKEN)
 
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///item.db'
@@ -196,7 +191,11 @@ def data():
 @app.route("/api/send_data", methods=['POST', 'OPTIONS', 'GET'])
 @cross_origin()
 def send_data():
-    return return_db_data(Item)
+    all_data = []
+    data = Item.query.all()
+    for el in data:
+        all_data.append(json.dumps(el.toJSON()))
+    return all_data
 
 
 @app.route('/api/order_data', methods=['POST', 'OPTIONS', 'GET'])
@@ -241,13 +240,25 @@ def order_data():
 @app.route("/api/send_order_data", methods=['POST', 'OPTIONS', 'GET'])
 @cross_origin()
 def send_order_data():
-    return return_db_data(Order)
+    all_data = []
+    data = Order.query.all()
+    for el in data:
+        all_data.append(json.dumps(el.toJSON()))
+    return all_data
 
 
 @app.route("/api/send_telegram_order_data", methods=['POST', 'OPTIONS', 'GET'])
 @cross_origin()
 def send_telegram_order_data():
-    return return_telegram_db_data(Order, db)
+    all_data = []
+    data = Order.query.all()
+    for el in data:
+        if (el.isChecked == True and el.isChecked_count == 0) or el.isChecked == False:
+            el.isChecked = not el.isChecked
+            el.isChecked_count += 1
+        all_data.append(json.dumps(el.toJSON()))
+    db.session.commit()
+    return all_data
 
 
 @app.route('/api/support_data', methods=['POST', 'OPTIONS', 'GET'])
@@ -279,13 +290,25 @@ def support_data():
 @app.route("/api/send_support_data", methods=['POST', 'OPTIONS', 'GET'])
 @cross_origin()
 def send_support_data():
-    return return_db_data(Support)
+    all_data = []
+    data = Support.query.all()
+    for el in data:
+        all_data.append(json.dumps(el.toJSON()))
+    return all_data
 
 
 @app.route("/api/send_telegram_support_data", methods=['POST', 'OPTIONS', 'GET'])
 @cross_origin()
 def send_telegram_support_data():
-    return return_telegram_db_data(Support, db)
+    all_data = []
+    data = Support.query.all()
+    for el in data:
+        if (el.isChecked == True and el.isChecked_count == 0) or el.isChecked == False:
+            el.isChecked = not el.isChecked
+            el.isChecked_count += 1
+        all_data.append(json.dumps(el.toJSON()))
+    db.session.commit()
+    return all_data
 
 
 @app.route("/api/statistic_delete", methods=['POST', 'OPTIONS', 'GET'])

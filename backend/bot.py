@@ -1,19 +1,9 @@
 import telebot
 import requests
 import json
-from io import BytesIO
-from backend.api import bot, TOKEN
 
-with open('backend/Pictures/bot_pict.jpeg', 'rb') as photo:
-    response = requests.post(
-        url=f'https://api.telegram.org/bot{TOKEN}/setMyProfilePhoto',
-        files={'photo': photo}
-    )
-    
-    if response.status_code == 200:
-        print('Profile picture set successfully!')
-    else:
-        print('Failed to set profile picture:', response.text)
+TOKEN = '5862336139:AAGIhDXjNIOwzr-usk1VNOQgCbEJZ4mmJxM'
+bot = telebot.TeleBot(TOKEN)
 
 
 @bot.message_handler(commands=['start'])
