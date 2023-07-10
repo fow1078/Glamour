@@ -1,11 +1,16 @@
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite';
-
 // vite.config.js
+
+import { defineConfig } from 'vite';
+import reactRefresh from '@vitejs/plugin-react-refresh';
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [reactRefresh()],
   build: {
-    // generate manifest.json in outDir
     manifest: true,
+    outDir: '../dist',
+    assetsDir: '',
+    assetsInlineLimit: 0,
+    cssCodeSplit: false,
+    sourcemap: true,
   },
-})
+});

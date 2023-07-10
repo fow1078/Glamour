@@ -1,0 +1,68 @@
+{
+  "index.html": {
+    "assets": [
+      "uselessBg3-3a8ae326.mp4",
+      "ukraine-e5047fae.png",
+      "usa-e0df305c.png",
+      "white_logo-8f4b1b4f.png",
+      "loading-93c61cf9.gif",
+      "OldEnglishFive-593a7cf4.ttf",
+      "newBg-94a4a39d.mp4"
+    ],
+    "file": "index-c70fbe68.js",
+    "isEntry": true,
+    "src": "index.html"
+  },
+  "src/assets/favicons/apple-touch-icon.png": {
+    "file": "apple-touch-icon-1b4e5481.png",
+    "src": "src/assets/favicons/apple-touch-icon.png"
+  },
+  "src/assets/favicons/favicon-16x16.png": {
+    "file": "favicon-16x16-3d16768c.png",
+    "src": "src/assets/favicons/favicon-16x16.png"
+  },
+  "src/assets/favicons/favicon-32x32.png": {
+    "file": "favicon-32x32-fd982e56.png",
+    "src": "src/assets/favicons/favicon-32x32.png"
+  },
+  "src/assets/favicons/safari-pinned-tab.svg": {
+    "file": "safari-pinned-tab-e71396c7.svg",
+    "src": "src/assets/favicons/safari-pinned-tab.svg"
+  },
+  "src/assets/favicons/site.webmanifest": {
+    "file": "site-310b8694.webmanifest",
+    "src": "src/assets/favicons/site.webmanifest"
+  },
+  "src/assets/fonts/OldEnglishFive.ttf": {
+    "file": "OldEnglishFive-593a7cf4.ttf",
+    "src": "src/assets/fonts/OldEnglishFive.ttf"
+  },
+  "src/assets/images/loading.gif": {
+    "file": "loading-93c61cf9.gif",
+    "src": "src/assets/images/loading.gif"
+  },
+  "src/assets/images/newBg.mp4": {
+    "file": "newBg-94a4a39d.mp4",
+    "src": "src/assets/images/newBg.mp4"
+  },
+  "src/assets/images/ukraine.png": {
+    "file": "ukraine-e5047fae.png",
+    "src": "src/assets/images/ukraine.png"
+  },
+  "src/assets/images/usa.png": {
+    "file": "usa-e0df305c.png",
+    "src": "src/assets/images/usa.png"
+  },
+  "src/assets/images/uselessBg3.mp4": {
+    "file": "uselessBg3-3a8ae326.mp4",
+    "src": "src/assets/images/uselessBg3.mp4"
+  },
+  "src/assets/images/white_logo.png": {
+    "file": "white_logo-8f4b1b4f.png",
+    "src": "src/assets/images/white_logo.png"
+  },
+  "style.css": {
+    "file": "style-b7da7d4d.css",
+    "src": "style.css"
+  }
+}
