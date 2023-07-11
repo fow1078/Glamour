@@ -20,7 +20,7 @@ function SecondNav() {
         <Col xs={{span: 6, offset: 3}} md={{span: 4, offset: 4}} lg={{span: 2, offset: 5}} style={{marginBottom: '20px'}} as='a' onClick={handleLogoClick}>
           <LazyLoadImage
             src={Logo}
-            width={200}
+            width={'100%'}
             height={'auto'}
             className='margin-xs-center'
             alt="Glamour Logo"
