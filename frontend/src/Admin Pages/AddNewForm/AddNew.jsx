@@ -159,14 +159,14 @@ function AdminAddNew() {
           </Row>
           <Row>
             <Col xs={12} md={6}>
-              <div style={{display: 'flex', flexDirection: 'column'}}>
+              <div style={{display: 'flex', flexDirection: 'column', marginBottom: '10px'}}>
                 <label htmlFor='item-images' style={{fontSize: '18px', fontWeight: '500'}}>Images</label>
                 <input multiple type='file' accept="image/*" required onChange={handleImagesChange} className='no-focus' id='item-images' name='item-images' style={{borderRadius: '5px', backgroundColor: '#00000037', border: '2px solid #000', padding: '4px'}} />
               </div>
             </Col>
             <Col xs={12} md={6} style={{display: 'flex', alignItems: 'flex-end'}}>
               <div style={{width: '100%', textAlign: 'end'}}>
-                <button type='' onClick={handleClick} disabled={isImagesLoading ? false : true} style={{padding: '10px 25px', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '5px'}}>Submit</button>
+                <button type='' className='add-new-disabled' onClick={handleClick} disabled={isImagesLoading ? false : true} style={{padding: '10px 25px', backgroundColor: '#000', color: '#fff', border: 'none', borderRadius: '5px'}}>Submit</button>
               </div>
             </Col>
           </Row>

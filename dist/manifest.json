@@ -8,7 +8,7 @@
       "OldEnglishFive-593a7cf4.ttf",
       "newDarkenFireBg-2249edd9.gif"
     ],
-    "file": "index-c5bd347c.js",
+    "file": "index-1f60f981.js",
     "isEntry": true,
     "src": "index.html"
   },
@@ -57,7 +57,7 @@
     "src": "src/assets/images/white_logo.png"
   },
   "style.css": {
-    "file": "style-6614fc3d.css",
+    "file": "style-d7ebbb67.css",
     "src": "style.css"
   }
 }

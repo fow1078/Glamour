@@ -418,3 +418,16 @@ li {list-style-type: none;}
     opacity: 0;
   }
 } */
+
+.add-new-disabled {
+  transition: 0.4s;
+}
+
+.add-new-disabled:disabled {
+  background-color: #5c5c5c;
+}
+
+.add-new-disabled:hover {
+  background-color: #fff;
+  color: #000;
+}
