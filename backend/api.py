@@ -188,7 +188,7 @@ def data():
                     data['description_EN'],
                     data['slug'],
                     string_sizes,
-                    data['in_stock'],
+                    True,
                     string_images)
         
         try:
