@@ -424,10 +424,10 @@ li {list-style-type: none;}
 }
 
 .add-new-disabled:disabled {
-  background-color: #5c5c5c;
+  background-color: #919191 !important;
 }
 
 .add-new-disabled:hover {
-  background-color: #fff;
-  color: #000;
+  background-color: #fff !important;
+  color: #000 !important;
 }
