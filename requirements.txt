@@ -1,4 +1,3 @@
-alabaster @ file:///home/ktietz/src/ci/alabaster_1611921544520/work
 alembic==1.9.1
 anaconda-client==1.11.0
 anaconda-navigator==2.3.1
