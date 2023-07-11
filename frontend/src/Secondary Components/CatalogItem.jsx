@@ -23,7 +23,7 @@ function CatalogItem({data}) {
       </Link>
       <div>
         <Link to={`/catalog/${data.slug}-${data.itemID}`} state={{ data: data }}><h5 className='item_title' style={{marginTop: '20px'}}>{data.name}</h5></Link>
-        <Link to={`/catalog/${data.slug}-${data.itemID}`} state={{ data: data }}><h6 className='item_price'>{isUSD ? data.price_USD + '$' : data.price_UAH + '₴'}</h6></Link>
+        <Link to={`/catalog/${data.slug}-${data.itemID}`} state={{ data: data }}><h6 className='item_price' style={{textDecoration: data.in_stock ? '' : 'line-through'}}>{data.in_stock ? isUSD ? data.price_USD + '$' : data.price_UAH + '₴' : 'SOLDOUT'}</h6></Link>
       </div>
     </Col>
   )

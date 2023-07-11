@@ -88,6 +88,10 @@ function EditCurrent() {
     }, 2000)
   }
 
+  const [isInStock, setIsInStock] = useState(false);
+  const handleInStockChange = () => {
+    setIsInStock(!isInStock)
+  }
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -102,7 +106,8 @@ function EditCurrent() {
       description_UA: descrUA.trim(),
       slug: label.toLowerCase().replaceAll(/\W/g, '-').replaceAll(/-+/g, '-').replace(/^-/, '').replace(/-$/, ''),
       images: images,
-      sizes: uniqeSizes.length < 1 ? '' : uniqeSizes
+      sizes: uniqeSizes.length < 1 ? '' : uniqeSizes,
+      in_stock: isInStock
     }
     postData("https://glamour-42ebc6e636b8.herokuapp.com/api/edit_items", data);
     setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500)
@@ -190,6 +195,12 @@ function EditCurrent() {
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                   <label htmlFor='item-images' style={{fontSize: '18px', fontWeight: '500'}}>Images</label>
                   <input multiple type='file' accept="image/*" required onChange={handleImagesChange} className='no-focus' id='item-images' name='item-images' style={{borderRadius: '5px', backgroundColor: '#00000037', border: '2px solid #000', padding: '4px'}} />
+                </div>
+              </Col>
+              <Col xs={12} md={6} className='edit_delete_btn' style={{display: 'flex', alignItems: 'flex-end', justifyContent: 'end'}}>
+                <div>
+                  <input className='size-input-control' name='item-inStock' id='item-inStock' value={isInStock} type='checkbox' onChange={handleInStockChange} />
+                  <label htmlFor='item-inStock' style={{fontSize: '16px', fontWeight: '400'}}>In Stock</label>
                 </div>
               </Col>
             </Row>

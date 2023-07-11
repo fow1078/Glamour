@@ -431,3 +431,5 @@ li {list-style-type: none;}
   background-color: #fff !important;
   color: #000 !important;
 }
+
+.addbtn-disabled:disabled { background-color: #898989; }

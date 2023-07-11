@@ -57,7 +57,7 @@ function Item() {
                 <Sizes sizes={itemData.sizes === '' ? ['OS'] : tmpSizes} size={size} setSize={setSize} />
               </div>
               <div style={{width: '100%', marginBottom: '30px'}}>
-                <button className='addtocart-btn' onClick={handleAdd}>{isEnglish ? 'Add To Cart' : 'Додати до кошика'}</button>
+                <button className='addtocart-btn addbtn-disabled' disabled={itemData.in_stock ? false : true} onClick={handleAdd}>{itemData.in_stock ? isEnglish ? 'Add To Cart' : 'Додати до кошика' : 'SOLDOUT'}</button>
               </div>
               <div>
                 <ul>
