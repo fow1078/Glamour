@@ -1,4 +1,6 @@
 import json
+import datetime as dt
+import pytz
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
@@ -76,10 +78,11 @@ class Order(db.Model):
     price_UAH = db.Column(db.Integer, nullable=False)
     price_USD = db.Column(db.Integer, nullable=False)
     items = db.Column(db.String(1000), nullable=False)
+    date = db.Column(db.String(100), nullable=False)
     isChecked = db.Column(db.Boolean, nullable=True)
     isChecked_count = db.Column(db.Integer, nullable=False)
     
-    def __init__(self, order_id, email, country, first_name, last_name, address, address_details, city, postal_code, phone_number, price_UAH, price_USD, items):
+    def __init__(self, order_id, email, country, first_name, last_name, address, address_details, city, postal_code, phone_number, price_UAH, price_USD, items, date):
         self.order_id = order_id
         self.email = email
         self.country = country
@@ -93,6 +96,7 @@ class Order(db.Model):
         self.price_UAH = price_UAH
         self.price_USD = price_USD
         self.items = items
+        self.date = date
         self.isChecked = True
         self.isChecked_count = 0
         
@@ -112,6 +116,7 @@ class Order(db.Model):
             'price_UAH': self.price_UAH,
             'price_USD': self.price_USD,
             'items': self.items,
+            'date': self.date,
             'isChecked': self.isChecked,
             'isChecked_count': self.isChecked_count
         }
@@ -125,14 +130,16 @@ class Support(db.Model):
     email = db.Column(db.String(100), nullable=False)
     phone_number = db.Column(db.String(100), nullable=False)
     comment = db.Column(db.String(100000), nullable=False)
+    date = db.Column(db.String(100), nullable=False)
     isChecked = db.Column(db.Boolean, nullable=True)
     isChecked_count = db.Column(db.Integer, nullable=False)
     
-    def __init__(self, full_name, email, phone_number, comment):
+    def __init__(self, full_name, email, phone_number, comment, date):
         self.full_name = full_name
         self.email = email
         self.phone_number = phone_number
         self.comment = comment
+        self.date = date
         self.isChecked = True
         self.isChecked_count = 0
         
@@ -142,6 +149,7 @@ class Support(db.Model):
             'email': self.email,
             'phone_number': self.phone_number,
             'comment': self.comment,
+            'date': self.date,
             'isChecked': self.isChecked,
             'isChecked_count': self.isChecked_count
         }
@@ -226,7 +234,8 @@ def order_data():
                     data['phone_number'],
                     data['price']['uah'],
                     data['price']['usd'],
-                    items)
+                    items,
+                    pytz.timezone('Europe/Kiev').localize(dt.datetime.now()).strftime("%Y-%m-%d, %H:%M"))
         
         try:
             db.session.add(order)
@@ -276,7 +285,8 @@ def support_data():
         support = Support(data['full_name'],
                     data['email'],
                     data['phone_number'],
-                    data['comment'])
+                    data['comment'],
+                    pytz.timezone('Europe/Kiev').localize(dt.datetime.now()).strftime("%Y-%m-%d %H:%M:%S"))
         
         try:
             db.session.add(support)

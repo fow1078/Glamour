@@ -37,9 +37,9 @@ def message(message):
     for msg in messages:
         msg = json.loads(msg)
         if msg['isChecked'] == False:
-            bot.send_message(message.chat.id, f"НОВЕ ЗАМОВЛЕННЯ №{msg['order_id']}\n\nКому: {msg['first_name']} {msg['last_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\nАдреса: {msg['address']}, {msg['address_details']}, {msg['city']}, {msg['country']}, {msg['postal_code']}\n\nЦіна: {msg['price_UAH']}₴ / {msg['price_USD']}$\nЗамовлення: {msg['items'][:-2]}")
+            bot.send_message(message.chat.id, f"НОВЕ ЗАМОВЛЕННЯ №{msg['order_id']}\n\nДата: {msg['date']}\nКому: {msg['first_name']} {msg['last_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\nАдреса: {msg['address']}, {msg['address_details']}, {msg['city']}, {msg['country']}, {msg['postal_code']}\n\nЦіна: {msg['price_UAH']}₴ / {msg['price_USD']}$\nЗамовлення: {msg['items'][:-2]}")
         else:
-            bot.send_message(message.chat.id, f"СТАРЕ ЗАМОВЛЕННЯ №{msg['order_id']}\n\nКому: {msg['first_name']} {msg['last_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\nАдреса: {msg['address']}, {msg['address_details']}, {msg['city']}, {msg['country']}, {msg['postal_code']}\n\nЦіна: {msg['price_UAH']}₴ / {msg['price_USD']}$\nЗамовлення: {msg['items'][:-2]}")
+            bot.send_message(message.chat.id, f"СТАРЕ ЗАМОВЛЕННЯ №{msg['order_id']}\n\nДата: {msg['date']}\nКому: {msg['first_name']} {msg['last_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\nАдреса: {msg['address']}, {msg['address_details']}, {msg['city']}, {msg['country']}, {msg['postal_code']}\n\nЦіна: {msg['price_UAH']}₴ / {msg['price_USD']}$\nЗамовлення: {msg['items'][:-2]}")
 
 
 @bot.message_handler(commands=['orderOld'])
@@ -48,7 +48,7 @@ def message(message):
     for msg in messages:
         msg = json.loads(msg)
         if msg['isChecked'] == True:
-            bot.send_message(message.chat.id, f"СТАРЕ ЗАМОВЛЕННЯ №{msg['order_id']}\n\nКому: {msg['first_name']} {msg['last_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\nАдреса: {msg['address']}, {msg['address_details']}, {msg['city']}, {msg['country']}, {msg['postal_code']}\n\nЦіна: {msg['price_UAH']}₴ / {msg['price_USD']}$\nЗамовлення: {msg['items'][:-2]}")
+            bot.send_message(message.chat.id, f"СТАРЕ ЗАМОВЛЕННЯ №{msg['order_id']}\n\nДата: {msg['date']}\nКому: {msg['first_name']} {msg['last_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\nАдреса: {msg['address']}, {msg['address_details']}, {msg['city']}, {msg['country']}, {msg['postal_code']}\n\nЦіна: {msg['price_UAH']}₴ / {msg['price_USD']}$\nЗамовлення: {msg['items'][:-2]}")
 
 
 @bot.message_handler(commands=['orderNew'])
@@ -57,7 +57,7 @@ def message(message):
     for msg in messages:
         msg = json.loads(msg)
         if msg['isChecked'] == False:
-            bot.send_message(message.chat.id, f"НОВЕ ЗАМОВЛЕННЯ №{msg['order_id']}\n\nКому: {msg['first_name']} {msg['last_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\nАдреса: {msg['address']}, {msg['address_details']}, {msg['city']}, {msg['country']}, {msg['postal_code']}\n\nЦіна: {msg['price_UAH']}₴ / {msg['price_USD']}$\nЗамовлення: {msg['items'][:-2]}")
+            bot.send_message(message.chat.id, f"НОВЕ ЗАМОВЛЕННЯ №{msg['order_id']}\n\nДата: {msg['date']}\nКому: {msg['first_name']} {msg['last_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\nАдреса: {msg['address']}, {msg['address_details']}, {msg['city']}, {msg['country']}, {msg['postal_code']}\n\nЦіна: {msg['price_UAH']}₴ / {msg['price_USD']}$\nЗамовлення: {msg['items'][:-2]}")
         
 
 @bot.message_handler(commands=['supportAll'])
@@ -66,9 +66,9 @@ def message(message):
     for msg in messages:
         msg = json.loads(msg)
         if msg['isChecked'] == False:
-            bot.send_message(message.chat.id, f"НОВЕ ПОВІДОМЛЕННЯ\n\nВід: {msg['full_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\n\nКоментар: {msg['comment'].strip()}")
+            bot.send_message(message.chat.id, f"НОВЕ ПОВІДОМЛЕННЯ\n\nДата: {msg['date']}\nВід: {msg['full_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\n\nКоментар: {msg['comment'].strip()}")
         else:
-            bot.send_message(message.chat.id, f"СТАРЕ ПОВІДОМЛЕННЯ\n\nВід: {msg['full_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\n\nКоментар: {msg['comment'].strip()}")
+            bot.send_message(message.chat.id, f"СТАРЕ ПОВІДОМЛЕННЯ\n\nДата: {msg['date']}\nВід: {msg['full_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\n\nКоментар: {msg['comment'].strip()}")
 
 
 @bot.message_handler(commands=['supportOld'])
@@ -77,7 +77,7 @@ def message(message):
     for msg in messages:
         msg = json.loads(msg)
         if msg['isChecked'] == True:
-            bot.send_message(message.chat.id, f"СТАРЕ ПОВІДОМЛЕННЯ\n\nВід: {msg['full_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\n\nКоментар: {msg['comment'].strip()}")
+            bot.send_message(message.chat.id, f"СТАРЕ ПОВІДОМЛЕННЯ\n\nДата: {msg['date']}\nВід: {msg['full_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\n\nКоментар: {msg['comment'].strip()}")
 
 
 @bot.message_handler(commands=['supportNew'])
@@ -86,6 +86,6 @@ def message(message):
     for msg in messages:
         msg = json.loads(msg)
         if msg['isChecked'] == False:
-            bot.send_message(message.chat.id, f"НОВЕ ПОВІДОМЛЕННЯ\n\nВід: {msg['full_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\n\nКоментар: {msg['comment'].strip()}")  
+            bot.send_message(message.chat.id, f"НОВЕ ПОВІДОМЛЕННЯ\n\nДата: {msg['date']}\nВід: {msg['full_name']}\nE-mail: {msg['email']}\nНомер телефону: {msg['phone_number']}\n\nКоментар: {msg['comment'].strip()}")  
             
 bot.infinity_polling()
