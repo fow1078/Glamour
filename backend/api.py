@@ -33,9 +33,10 @@ class Item(db.Model):
     description_en = db.Column(db.String(1000), nullable=False)
     slug = db.Column(db.String(100), index=True)
     sizes = db.Column(db.String(30))
+    in_stock = db.Column(db.Boolean, nullable=False)
     image = db.Column(db.String(100000))
     
-    def __init__(self, itemID, name, price_USD, price_UAH, description, description_en, slug, sizes, image):
+    def __init__(self, itemID, name, price_USD, price_UAH, description, description_en, slug, sizes, in_stock, image):
         self.itemID = itemID
         self.name = name
         self.price_USD = price_USD
@@ -44,6 +45,7 @@ class Item(db.Model):
         self.description_en = description_en
         self.slug = slug
         self.sizes = sizes
+        self.in_stock = in_stock
         self.image = image
     
     def toJSON(self):
@@ -57,6 +59,7 @@ class Item(db.Model):
             'description_en': self.description_en,
             'slug': self.slug,
             'sizes': self.sizes,
+            'in_stock': self.in_stock,
             'image': self.image
         }
     
@@ -185,6 +188,7 @@ def data():
                     data['description_EN'],
                     data['slug'],
                     string_sizes,
+                    data['in_stock'],
                     string_images)
         
         try:
