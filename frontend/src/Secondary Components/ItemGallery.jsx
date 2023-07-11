@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
@@ -27,7 +30,16 @@ function ItemGallery({ images }) {
         className="mySwiper2"
       >
         {images.map((image, ind) => {
-          return <SwiperSlide key={ind}><img src={image} alt={`image-${ind}`} /></SwiperSlide>
+          return <SwiperSlide key={ind}>
+            <LazyLoadImage
+              src={image}
+              width={'100%'}
+              height={'auto'}
+              className='margin-xs-center img-xs-mw'
+              alt={`image-${ind}`}
+              effect="blur"
+            />
+          </SwiperSlide>
         })}
       </Swiper>
       <Swiper
@@ -41,7 +53,16 @@ function ItemGallery({ images }) {
         className="mySwiper"
       >
         {images.map((image, ind) => {
-          return <SwiperSlide key={ind}><img src={image} alt={`image-${ind}`} /></SwiperSlide>
+          return <SwiperSlide key={ind}>
+            <LazyLoadImage
+              src={image}
+              width={'100%'}
+              height={'auto'}
+              className='margin-xs-center img-xs-mw'
+              alt={`image-${ind}`}
+              effect="blur"
+            />
+          </SwiperSlide>
         })}
       </Swiper>
     </>

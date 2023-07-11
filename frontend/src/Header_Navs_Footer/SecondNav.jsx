@@ -5,6 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Logo from '../assets/images/white_logo.png'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 
 function SecondNav() {
@@ -16,7 +18,14 @@ function SecondNav() {
     <Container>
       <Row>
         <Col xs={{span: 6, offset: 3}} md={{span: 4, offset: 4}} lg={{span: 2, offset: 5}} style={{marginBottom: '20px'}} as='a' onClick={handleLogoClick}>
-          <img src={Logo} alt='Glamour Logo' className='margin-xs-center' />
+          <LazyLoadImage
+            src={Logo}
+            width={200}
+            height={'auto'}
+            className='margin-xs-center'
+            alt="Glamour Logo"
+            effect="blur"
+          />
         </Col>
       </Row>
       <Row>
