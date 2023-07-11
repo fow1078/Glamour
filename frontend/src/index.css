@@ -13,16 +13,20 @@ body {
 }
 
 #bgVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
+  width: 100vw;
+  height: auto;
   min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
-  width: 100%;
-  overflow-y: hidden;
-  pointer-events: all;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-position: center center;
+  background-size: cover;
+  z-index: -20;
+  display: block !important;
 }
+
 
 p {
   margin: 0;
