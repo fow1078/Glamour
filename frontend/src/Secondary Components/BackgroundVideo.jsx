@@ -1,11 +1,11 @@
 import React from 'react';
-import Video from '../assets/images/newDarkenFireBg.mp4';
+// import Video from '../assets/images/newDarkenFireBg.mp4';
 
 function BackgroundVideo() {
   return (
-    <video autoPlay muted loop id="bgVideo">
-      <source src={Video} type="video/mp4" />
-    </video>
+    <div id="bgVideo">
+      {/* <source src={Video} autoPlay muted loop  type="video/mp4" /> */}
+    </div>
   )
 }
 

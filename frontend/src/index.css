@@ -14,17 +14,29 @@ body {
 
 #bgVideo {
   width: 100vw;
-  height: auto;
-  min-width: 100%;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
+  background-image: url('./assets/images/newDarkenFireBg.gif');
+  background-attachment: fixed;
   background-position: center center;
   background-size: cover;
   z-index: -20;
   display: block !important;
+}
+
+#bgVideo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.122);
+  z-index: -10;
 }
 
 

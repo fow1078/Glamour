@@ -1,14 +1,14 @@
 {
   "index.html": {
     "assets": [
-      "newDarkenFireBg-1d171470.mp4",
       "ukraine-e5047fae.png",
       "usa-e0df305c.png",
       "white_logo-8f4b1b4f.png",
       "loading-93c61cf9.gif",
-      "OldEnglishFive-593a7cf4.ttf"
+      "OldEnglishFive-593a7cf4.ttf",
+      "newDarkenFireBg-2249edd9.gif"
     ],
-    "file": "index-19321dd6.js",
+    "file": "index-c5bd347c.js",
     "isEntry": true,
     "src": "index.html"
   },
@@ -40,9 +40,9 @@
     "file": "loading-93c61cf9.gif",
     "src": "src/assets/images/loading.gif"
   },
-  "src/assets/images/newDarkenFireBg.mp4": {
-    "file": "newDarkenFireBg-1d171470.mp4",
-    "src": "src/assets/images/newDarkenFireBg.mp4"
+  "src/assets/images/newDarkenFireBg.gif": {
+    "file": "newDarkenFireBg-2249edd9.gif",
+    "src": "src/assets/images/newDarkenFireBg.gif"
   },
   "src/assets/images/ukraine.png": {
     "file": "ukraine-e5047fae.png",
@@ -57,7 +57,7 @@
     "src": "src/assets/images/white_logo.png"
   },
   "style.css": {
-    "file": "style-721d8fcb.css",
+    "file": "style-547c64da.css",
     "src": "style.css"
   }
 }
