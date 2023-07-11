@@ -23,7 +23,7 @@ function Home() {
           setClothesData(tmpArr);
           setTimeout(() => {
             setIsLoading(false);
-          }, 2000)
+          }, 1000)
         })
     );
   }, []);
