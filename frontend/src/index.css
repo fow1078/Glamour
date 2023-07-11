@@ -26,6 +26,7 @@ body {
   background-size: cover;
   z-index: -20;
   display: block !important;
+  overflow: hidden;
 }
 
 #bgVideo::after {
