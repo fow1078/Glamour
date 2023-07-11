@@ -21,7 +21,7 @@ body {
   bottom: 0;
   right: 0;
   background-image: url('./assets/images/newDarkenFireBg.gif');
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   background-position: center center;
   background-size: cover;
   z-index: -20;
