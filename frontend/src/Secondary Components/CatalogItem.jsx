@@ -16,6 +16,7 @@ function CatalogItem({data}) {
           width={'100%'}
           height={'auto'}
           className='margin-xs-center img-xs-mw'
+          style={{ display: 'flex'}}
           alt={data.name}
           effect="blur"
         />
