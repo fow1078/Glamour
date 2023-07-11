@@ -434,9 +434,11 @@ def edit_items():
         item.description_en = item_data['description_EN']
         item.slug = item_data['slug']
         item.sizes = string_new_sizes
+        item.in_stock = item_data['in_stock']
         item.image = string_new_images
         
         db.session.commit()
+    
     return '200'
         
         
