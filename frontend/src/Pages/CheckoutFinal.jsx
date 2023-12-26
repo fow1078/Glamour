@@ -5,13 +5,14 @@ import Row from 'react-bootstrap/esm/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import Loading from './Loading';
+import { url } from '../url'
 
 
 function CheckoutFinal() {
   const [orderId, setOrderId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() =>  {
-    fetch("https://glamour-42ebc6e636b8.herokuapp.com/api/send_order_data").then((res) =>
+    fetch(`${url}/api/send_order_data`).then((res) =>
         res.json().then((data) => { 
           setOrderId(JSON.parse(data[data.length - 1]).order_id)
           setIsLoading(false);

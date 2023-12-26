@@ -52,7 +52,7 @@ function Contact() {
       phone_number: number, 
       comment: comment
     }
-    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/support_data", data)
+    postData(`${url}/api/support_data`, data)
     setTimeout(() => { window.location.reload(); }, 500)
   }
   return (
@@ -65,10 +65,10 @@ function Contact() {
           <form style={{borderRadius: '10px', padding: '20px'}}> 
             <Row className='justify-content-center'> 
               <Col xs={{span: 12, offset: 0}} md={{span: 6, offset: 0}}>
-                <input value={fullname} onChange={handleNameChange} type='text' style={{backgroundColor: '#00000073', border: '1px #000 solid', width: '100%', padding: '10px 15px',  }} className='contact_input name_input' placeholder='Jack Daniels' required id='validationDefault01' />
+                <input value={fullname} onChange={handleNameChange} type='text' style={{backgroundColor: 'rgb(172 172 172 / 45%)', border: '1px solid rgb(154 154 154)', width: '100%', padding: '10px 15px',  }} className='contact_input name_input' placeholder='Jack Daniels' required id='validationDefault01' />
               </Col>
               <Col xs={{span: 12, offset: 0}} md={{span: 6, offset:0}}>
-                <input value={email} onChange={handleEmailChange} type='email' style={{backgroundColor: '#00000073', border: '1px #000 solid', width: '100%', padding: '10px 15px' }} className='contact_input' placeholder='name@example.com' required id='validationDefault02' />
+                <input value={email} onChange={handleEmailChange} type='email' style={{backgroundColor: 'rgb(172 172 172 / 45%)', border: '1px solid rgb(154 154 154)', width: '100%', padding: '10px 15px' }} className='contact_input' placeholder='name@example.com' required id='validationDefault02' />
               </Col>
             </Row>
             <Row className='justify-content-center'> 
@@ -78,12 +78,12 @@ function Contact() {
             </Row>
             <Row className='justify-content-center'> 
               <Col xs={{span: 12, offset: 0 }} style={{marginTop: '10px'}}>
-                <textarea value={comment} onChange={handleCommentChange} type='tel' style={{backgroundColor: '#00000073', border: '1px #000 solid', width: '100%', padding: '10px 15px', height: '100px'  }} className='contact_input' placeholder='Comment' required id='validationDefault05' />
+                <textarea value={comment} onChange={handleCommentChange} type='tel' style={{backgroundColor: 'rgb(172 172 172 / 45%)', border: '1px solid rgb(154 154 154)', width: '100%', padding: '10px 15px', height: '100px'  }} className='contact_input' placeholder='Comment' required id='validationDefault05' />
               </Col>
             </Row>
             <Row className='justify-content-center justify-content-md-end' style={{marginTop: '10px'}}>
               <Col xs={{span: 6}} md={4}>
-                <button onClick={handleSubmit} className='contact_btn' style={{backgroundColor: '#000', border: '1px #000 solid', width: '100%', padding: '10px 15px', color: '#fff', transition: '0.4s'}} type="submit">{isEnglish ? 'Submit' : 'Підтвердити'}</button>
+                <button onClick={handleSubmit} className='contact_btn' style={{backgroundColor: 'rgb(172 172 172 / 45%)', border: '1px solid rgb(154 154 154)', width: '100%', padding: '10px 15px', color: '#fff', transition: '0.4s'}} type="submit">{isEnglish ? 'Submit' : 'Підтвердити'}</button>
               </Col>
             </Row>
           </form>

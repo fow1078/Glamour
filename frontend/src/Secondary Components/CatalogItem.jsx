@@ -9,7 +9,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 function CatalogItem({data}) {
   const { isUSD } = useSelector((store) => store.curr)
   return (
-    <Col xs={12} sm={6} lg={4} xl={3} className='d-flex justify-content-center flex-column d-sm-block'>
+    <Col xs={12} sm={6} lg={4} xl={2} className='d-flex justify-content-center flex-column d-sm-block'>
       <Link to={`/catalog/${data.slug}-${data.itemID}`} state={{ data: data }} style={{width: '100%', justifyContent: 'center', display: 'flex'}}>
         <LazyLoadImage
           src={data.image.split(', ')[0]}

@@ -7,6 +7,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { CountryDropdown } from 'react-country-region-selector';
 import postData from '../common/postData';
+import { url } from '../url'
 
 
 function CheckOut() {
@@ -88,7 +89,7 @@ function CheckOut() {
       event.stopPropagation();
     } else {
       event.preventDefault();
-      postData("https://glamour-42ebc6e636b8.herokuapp.com/api/order_data", data);
+      postData(`${url}/api/order_data`, data);
       setTimeout(() => {
         window.location.replace("/checkout/final");
       }, 1000)

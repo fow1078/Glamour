@@ -1,6 +1,6 @@
-import json
 import datetime as dt
 import pytz
+import json 
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
@@ -20,6 +20,35 @@ app.config['SQLALCHEMY_BINDS'] = {
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
+import boto3
+
+session = boto3.Session(
+    aws_access_key_id='AKIAREGFUMRXNWNVM35E',
+    aws_secret_access_key='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',
+)
+
+S3 = session.client('s3')
+BUCKET_NAME = 'glamourbacket'
+
+KEY_ITEM = 'item.db'
+KEY_ORDER = 'order.db'
+KEY_SUPPORT = 'support.db'
+
+LOCAL_PATH = './backend'
+
+def get_data_from_storage(key):
+    response = S3.get_object(Bucket=BUCKET_NAME, Key=key)
+    S3.download_file(BUCKET_NAME, key, f'{LOCAL_PATH}/item.db')
+    print(response)
+    return response
+
+def upload_data_to_storage(key, data):
+    response = S3.get_object(Bucket=BUCKET_NAME, Key=key)
+    return response
+
+get_data_from_storage(KEY_ITEM)
+
 
 class Item(db.Model):
     __tablename__ = 'clothes'
@@ -169,6 +198,7 @@ def data():
 
     if request.method == 'POST':
         data = request.get_json()
+        print(data)
         
         string_sizes = ""
         for size in data['sizes']:
@@ -188,7 +218,7 @@ def data():
                     data['description_EN'],
                     data['slug'],
                     string_sizes,
-                    True,
+                    data['in_stock'],
                     string_images)
         
         try:

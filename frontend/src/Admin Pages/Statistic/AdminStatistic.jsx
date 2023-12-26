@@ -8,13 +8,15 @@ import AdminNavigation from '../Components/AdminNavigation';
 import postData from '../../common/postData';
 import Accordion from 'react-bootstrap/Accordion';
 import Loading from '../../Pages/Loading';
+import { url } from '../../url'
+
 
 
 function AdminStatistic() {
   const [orderData, setOrderData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() =>  {
-    fetch("https://glamour-42ebc6e636b8.herokuapp.com/api/send_order_data").then((res) =>
+    fetch(`${url}/api/send_order_data`).then((res) =>
         res.json().then((data) => { 
           let tmp = [];
           data.forEach((item) => tmp.push(JSON.parse(item)));
@@ -27,13 +29,13 @@ function AdminStatistic() {
   const handleRemove = (e, itemID) => {
     e.preventDefault();
     e.stopPropagation();
-    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/statistic_delete", {id: itemID});
+    postData(`${url}/api/statistic_delete`, {id: itemID});
     setTimeout(() => { window.location.reload(); }, 500)
   }
 
   const handleReset = (e) => {
     e.preventDefault();
-    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/reset_orders", {});
+    postData(`${url}/api/reset_orders`, {});
     setTimeout(() => { window.location.reload(); }, 500);
   }
 

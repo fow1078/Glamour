@@ -8,6 +8,8 @@ import Col from 'react-bootstrap/esm/Col';
 import postData from '../../common/postData';
 import AdminBg from '../Components/AdminBg';
 import AdminNavigation from '../Components/AdminNavigation';
+import { url } from '../../url';
+
 
 function EditCurrent() {
   let { state } = useLocation();
@@ -109,13 +111,13 @@ function EditCurrent() {
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes,
       in_stock: isInStock
     }
-    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/edit_items", data);
+    postData(`${url}/api/edit_items`, data);
     setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500)
   }
 
   const handleDelete = (e, id) => {
     e.preventDefault();
-    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/edit_delete", {id: id});
+    postData(`${url}/api/edit_delete`, {id: id});
     setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500);
   }
 

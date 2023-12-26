@@ -7,13 +7,14 @@ import AdminBg from '../Components/AdminBg';
 import AdminNavigation from '../Components/AdminNavigation';
 import { Link } from 'react-router-dom';
 import Loading from '../../Pages/Loading';
+import { url } from '../../url'
 
 
 function AdminEdit() {
   const [clothesData, setClothesData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetch("https://glamour-42ebc6e636b8.herokuapp.com/api/send_data").then((res) =>
+    fetch(`${url}/api/send_data`).then((res) =>
         res.json().then((data) => { 
           let tmpArr = [];
           data.forEach(item => tmpArr.push(JSON.parse(item)))

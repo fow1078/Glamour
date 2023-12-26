@@ -7,6 +7,9 @@ import AdminBg from '../Components/AdminBg';
 import AdminNavigation from '../Components/AdminNavigation';
 import postData from '../../common/postData'
 
+import { url } from '../../url'
+
+
 function AdminAddNew() {
   const [isImagesLoading, setIsImagesLoading] = useState(false);
   // Inputs Control
@@ -81,9 +84,10 @@ function AdminAddNew() {
       description_UA: descrUA.trim(),
       slug: label.toLowerCase().replaceAll(/\W/g, '-').replaceAll(/-+/g, '-').replace(/^-/, '').replace(/-$/, ''),
       images: images,
-      sizes: uniqeSizes.length < 1 ? '' : uniqeSizes
+      in_stock: true,
+      sizes: uniqeSizes.length < 1 ? '' : uniqeSizes,
     }
-    postData("https://glamour-42ebc6e636b8.herokuapp.com/api/data", data);
+    postData(`${url}/api/data`, data);
     setTimeout(() => { window.location.reload(); }, 1000);
   }
 
