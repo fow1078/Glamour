@@ -4,7 +4,7 @@ import pytz
 import json 
 
 # Flask imports
-from flask import request, jsonify, redirect
+from flask import request, jsonify
 from flask_cors import cross_origin
 from flask.helpers import send_from_directory
 
@@ -333,7 +333,7 @@ def payment():
             "order_id": order_id,
             "currency": f"{currency}",
             "amount": total_amount + "00",
-            "response_url": "http://localhost:5173/checkout/final",
+            "response_url": "https://glamour-42ebc6e636b8.herokuapp.com//checkout/final",
             "lang": lang
         }
         url = checkout.url(data).get('checkout_url')
