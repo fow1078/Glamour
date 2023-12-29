@@ -9,7 +9,7 @@
       "OldEnglishFive-593a7cf4.ttf",
       "ggs2-b22d2208.gif"
     ],
-    "file": "index-2a60f144.js",
+    "file": "index-c303cf81.js",
     "isEntry": true,
     "src": "index.html"
   },
@@ -62,7 +62,7 @@
     "src": "src/assets/images/white_logo.png"
   },
   "style.css": {
-    "file": "style-72d6f962.css",
+    "file": "style-717bb9e0.css",
     "src": "style.css"
   }
 }
