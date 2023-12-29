@@ -17,14 +17,13 @@ const cartSlice = createSlice({
       if (state.cartItems.length === 0) {
         state.cartItems.push(payload)
       } else {
-        state.cartItems.forEach((item, index) => {
-          if (payload.id === item.id) {
-            const currentItem = state.cartItems.find((item) => item.id === payload.id)
+        let ids = state.cartItems.map(item => item.id)
+        if (ids.includes(payload.id)) {
+          const currentItem = state.cartItems.find((item) => item.id === payload.id)
             currentItem.amount += 1; 
-          } else if (index === state.cartItems.length - 1) {
-            state.cartItems.push(payload)
-          }
-        })
+        } else {
+          state.cartItems.push(payload)
+        }
       }
     }, 
     removeItem: (state, { payload }) => {

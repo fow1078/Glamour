@@ -4,7 +4,7 @@ import pytz
 import json 
 
 # Flask imports
-from flask import request, jsonify
+from flask import request, jsonify, redirect
 from flask_cors import cross_origin
 from flask.helpers import send_from_directory
 
@@ -12,6 +12,9 @@ from flask.helpers import send_from_directory
 from backend.config import app, KEYS
 from backend.db import db, Item, Order, Support
 from backend.functions import generate_ID, upload_data_to_storage
+
+# Fondy
+from cloudipsp import Api, Checkout
 
 
 @app.route('/api/data', methods=['POST', 'OPTIONS', 'GET'])
@@ -25,7 +28,6 @@ def data():
 
     if request.method == 'POST':
         data = request.get_json()
-        print(data)
         
         string_sizes = ""
         for size in data['sizes']:
@@ -51,7 +53,7 @@ def data():
         try:
             db.session.add(item)
             db.session.commit()
-            upload_data_to_storage(KEYS["item.db"])
+            upload_data_to_storage(key=KEYS["KEY_ITEM"])
             return '200'
         
         except Exception as e:
@@ -84,7 +86,7 @@ def order_data():
         for i in data['cart_items']:
             items += i['name'] + ", " + i['size'] + ", " + str(i['amount']) + "; "
             
-        order = Order(generate_ID(),
+        order = Order(data['order_id'],
                     data['email'],
                     data['country'],
                     data['first_name'],
@@ -102,7 +104,7 @@ def order_data():
         try:
             db.session.add(order)
             db.session.commit()
-            upload_data_to_storage(KEYS["order.db"])
+            upload_data_to_storage(KEYS["KEY_ORDER"])
             return '200'
         
         except Exception as e:
@@ -130,7 +132,7 @@ def send_telegram_order_data():
             el.isChecked_count += 1
         all_data.append(json.dumps(el.toJSON()))
     db.session.commit()
-    upload_data_to_storage(KEYS["order.db"])
+    upload_data_to_storage(KEYS["KEY_ORDER"])
     return all_data
 
 
@@ -155,7 +157,7 @@ def support_data():
         try:
             db.session.add(support)
             db.session.commit()
-            upload_data_to_storage(KEYS["support.db"])
+            upload_data_to_storage(KEYS["KEY_SUPPORT"])
             return '200'
         
         except Exception as e:
@@ -183,7 +185,7 @@ def send_telegram_support_data():
             el.isChecked_count += 1
         all_data.append(json.dumps(el.toJSON()))
     db.session.commit()
-    upload_data_to_storage(KEYS["support.db"])
+    upload_data_to_storage(KEYS["KEY_SUPPORT"])
     return all_data
 
 
@@ -206,7 +208,7 @@ def statistic_delete():
             i += 1
             el.id = i
         db.session.commit()
-        upload_data_to_storage(KEYS["order.db"])
+        upload_data_to_storage(KEYS["KEY_ORDER"])
         
     return '200'
 
@@ -225,7 +227,7 @@ def reset_orders():
         for el in order:
             db.session.delete(el)
         db.session.commit()
-        upload_data_to_storage(KEYS["Order.db"])
+        upload_data_to_storage(KEYS["KEY_ORDER"])
     return '200'
 
 
@@ -243,7 +245,7 @@ def reset_supports():
         for el in support:
             db.session.delete(el)
         db.session.commit()
-        upload_data_to_storage(KEYS["support.db"])
+        upload_data_to_storage(KEYS["KEY_SUPPORT"])
     return '200'
 
 
@@ -266,7 +268,7 @@ def edit_delete():
             i += 1
             el.id = i
         db.session.commit()
-        upload_data_to_storage(KEYS["item.db"])
+        upload_data_to_storage(KEYS["KEY_ITEM"])
     return '200'
 
 
@@ -304,10 +306,39 @@ def edit_items():
         item.image = string_new_images
         
         db.session.commit()
-        upload_data_to_storage(KEYS["item.db"])
+        upload_data_to_storage(KEYS["KEY_ITEM"])
     
     return '200'
-        
+
+
+@app.route("/api/payment", methods=['POST', 'OPTIONS', 'GET'])
+@cross_origin()
+def payment():
+    if request.method == 'OPTIONS':
+        response = jsonify({'message': 'CORS preflight request successful'})
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        return response
+    
+    if request.method == 'POST':
+        item_data = request.get_json()
+        currency = item_data['currency']
+        total_amount = item_data['total_amount']
+        lang = item_data['lang']
+        order_id = item_data['order_id']
+
+        api = Api(merchant_id=1396424, secret_key='test')
+        checkout = Checkout(api=api)
+        data = {
+            "order_id": order_id,
+            "currency": f"{currency}",
+            "amount": total_amount + "00",
+            "response_url": "http://localhost:5173/checkout/final",
+            "lang": lang
+        }
+        url = checkout.url(data).get('checkout_url')
+        return {"url": url}
+
         
 @app.route('/')
 @app.route('/catalog')

@@ -31,7 +31,7 @@ KEYS = {
     "KEY_SUPPORT": "support.db"
 }
 
-LOCAL_PATH = './backend'
+LOCAL_PATH = './instance' # Change "instance" to "backend" if "instance" won't work on prod
 
 import backend.db
 import backend.api

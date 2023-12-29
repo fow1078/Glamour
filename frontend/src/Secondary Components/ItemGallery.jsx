@@ -34,8 +34,8 @@ function ItemGallery({ images }) {
             <LazyLoadImage
               src={image}
               width={'100%'}
-              height={'auto'}
-              className='margin-xs-center img-xs-mw'
+              height={'400px'}
+              className='margin-xs-center img-xs-mw object-fit-contain'
               alt={`image-${ind}`}
               effect="blur"
             />

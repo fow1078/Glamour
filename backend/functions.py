@@ -17,6 +17,5 @@ def get_data_from_storage(key):
 
 
 def upload_data_to_storage(key):
-    response = S3.get_object(Bucket=BUCKET_NAME, Key=key)
-    S3.upload_file(key, BUCKET_NAME, f'{LOCAL_PATH}/{key}')
-    return response
+    S3.upload_file(f'{LOCAL_PATH}/{key}', BUCKET_NAME, key)
+    return '200'

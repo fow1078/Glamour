@@ -11,7 +11,9 @@ import Footer from '../Header_Navs_Footer/Footer';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../features/Cart/cartSlice'
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Item() {
@@ -21,11 +23,23 @@ function Item() {
   const dispatch = useDispatch();
   let { state } = useLocation();
   let itemData = state.data;
+
   const handleAdd = () => {
     if (size !== '' ) {
       dispatch(addToCart({id: itemData.itemID + size, image: itemData.image.split(', ')[0], label: itemData.name, size: size, price_USD: itemData.price_USD, price_UAH: itemData.price_UAH, amount: 1}))
+      toast.success(`${itemData.name} added to cart!`, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   }
+
+
   const tmpSizes = itemData.sizes.split(', ');
   tmpSizes.pop();
   const tmpImages = itemData.image.split(', ');
@@ -39,6 +53,7 @@ function Item() {
   }, [])
   return (
     <>
+      <ToastContainer />
       <BackgroundVideo />
       <FirstNav />
       <div style={{paddingTop: '80px', paddingBottom: '120px'}}>

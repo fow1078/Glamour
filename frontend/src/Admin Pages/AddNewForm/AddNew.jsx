@@ -88,7 +88,7 @@ function AdminAddNew() {
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes,
     }
     postData(`${url}/api/data`, data);
-    setTimeout(() => { window.location.reload(); }, 1000);
+    // setTimeout(() => { window.location.reload(); }, 1000);
   }
 
   return (
