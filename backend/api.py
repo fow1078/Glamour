@@ -85,6 +85,11 @@ def order_data():
         items = ""
         for i in data['cart_items']:
             items += i['name'] + ", " + i['size'] + ", " + str(i['amount']) + "; "
+
+        dt_now = dt.datetime.now()
+        kiev_timezone = pytz.timezone('Europe/Kiev')
+        localized_time = kiev_timezone.localize(dt_now)
+        formatted_time = localized_time.strftime("%Y-%m-%d %H:%M:%S")
             
         order = Order(data['order_id'],
                     data['email'],
@@ -99,7 +104,7 @@ def order_data():
                     data['price']['uah'],
                     data['price']['usd'],
                     items,
-                    pytz.timezone('Europe/Kiev').localize(dt.datetime.now()).strftime("%Y-%m-%d, %H:%M"))
+                    formatted_time)
         
         try:
             db.session.add(order)
@@ -147,12 +152,17 @@ def support_data():
 
     if request.method == 'POST':
         data = request.get_json()
+
+        dt_now = dt.datetime.now()
+        kiev_timezone = pytz.timezone('Europe/Kiev')
+        localized_time = kiev_timezone.localize(dt_now)
+        formatted_time = localized_time.strftime("%Y-%m-%d %H:%M:%S")
             
         support = Support(data['full_name'],
                     data['email'],
                     data['phone_number'],
                     data['comment'],
-                    pytz.timezone('Europe/Kiev').localize(dt.datetime.now()).strftime("%Y-%m-%d %H:%M:%S"))
+                    formatted_time)
         
         try:
             db.session.add(support)
@@ -350,7 +360,6 @@ def payment():
 @app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/stats')
 @app.route('/z8d6Ta3H49iJb3S9AR6XtTpb/edit')
 @app.route('/checkout')
-@app.route('/checkout/final')
 @cross_origin()
 def routes(): 
     return send_from_directory(app.static_folder, 'index.html')
@@ -360,4 +369,9 @@ def routes():
 @app.route('/catalog/<id>')
 @cross_origin()
 def routes_id(id): 
+    return send_from_directory(app.static_folder, 'index.html')
+
+
+@app.route('/checkout/final')
+def route(): 
     return send_from_directory(app.static_folder, 'index.html')

@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import CatalogItem from '../Secondary Components/CatalogItem';
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import Loading from './Loading';
