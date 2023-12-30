@@ -97,7 +97,7 @@ function CheckOut() {
       setTimeout(() => {
         postData(`${url}/api/payment`, {"currency": isUSD ? "USD" : "UAH", "total_amount": isUSD ? data.price.usd.toString() : data.price.uah.toString(), "lang": isEnglish ? "en" : "uk", "order_id": data.order_id})
         .then(data => {
-          window.open(data.url, "_blank")
+          window.open(data.url)
         }) 
       }, 1000)
     }

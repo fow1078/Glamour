@@ -10,7 +10,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { useSelector } from 'react-redux';
 import postData from '../common/postData';
-
+import { url } from '../url';
 
 
 function Contact() {
@@ -22,7 +22,6 @@ function Contact() {
     async function getData() {
       const response = await fetch("https://ipapi.co/json/");
       const jsonData = await response.json();
-      // console.log(jsonData)
       setCountry(jsonData.country)
     }
     getData();
