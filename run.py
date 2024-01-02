@@ -8,18 +8,13 @@ PORT = int(os.environ.get('PORT', 8080))
 
 def run_flask():
     app.run(port=PORT, debug=False)
+    for key in KEYS:
+        get_data_from_storage(KEYS[key])
     
 def run_telebot():
     importlib.import_module('backend.bot')
 
-if __name__ == "__main__":
-    print("start")
-    for key in KEYS:
-        print(key)
-        get_data_from_storage(KEYS[key])
-
-    print("second")
-        
+if __name__ == "__main__":        
     flask_thread = threading.Thread(target=run_flask)
     telebot_thread = threading.Thread(target=run_telebot)
 
