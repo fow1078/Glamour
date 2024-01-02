@@ -8,7 +8,6 @@ PORT = int(os.environ.get('PORT', 8080))
 
 for key in KEYS:
     get_data_from_storage(KEYS[key])
-    print(key)
 
 def run_flask():
     app.run(port=PORT, debug=False)
