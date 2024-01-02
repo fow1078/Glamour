@@ -13,11 +13,11 @@ def generate_ID():
 def get_data_from_storage(key):
     response = S3.get_object(Bucket=BUCKET_NAME, Key=key)
     print(response)
-    S3.download_file(BUCKET_NAME, key, key)
+    S3.download_file(BUCKET_NAME, key, f'{LOCAL_PATH}/{key}')
     return {"response": 200}
 
 
 def upload_data_to_storage(key):
-    print(f'./{key}')
-    S3.upload_file(f'./{key}', BUCKET_NAME)
+    print(f'{key}')
+    S3.upload_file(key, BUCKET_NAME)
     return '200'

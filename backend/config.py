@@ -31,7 +31,7 @@ KEYS = {
     "KEY_SUPPORT": "support.db"
 }
 
-LOCAL_PATH = '.' 
+LOCAL_PATH = './instance' 
 
 import backend.db
 import backend.api
