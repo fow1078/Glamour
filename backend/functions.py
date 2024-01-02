@@ -19,5 +19,5 @@ def get_data_from_storage(key):
 
 def upload_data_to_storage(key):
     print(f'{key}')
-    S3.upload_file(key, BUCKET_NAME)
+    S3.upload_file(f'{key}', BUCKET_NAME, key)
     return '200'
