@@ -12,7 +12,7 @@ def generate_ID():
 
 def get_data_from_storage(key):
     # response = S3.get_object(Bucket=BUCKET_NAME, Key=key)
-    S3.download_file(BUCKET_NAME, key, f'./{key}')
+    S3.download_file(BUCKET_NAME, key, key)
     return {"response": 200}
 
 
