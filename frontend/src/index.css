@@ -433,3 +433,6 @@ li {list-style-type: none;}
 }
 
 .addbtn-disabled:disabled { background-color: #898989; }
+
+.policy-link {color: blue !important}
+.policy-link:hover {text-decoration: underline;}
