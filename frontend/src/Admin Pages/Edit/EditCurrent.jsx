@@ -109,7 +109,7 @@ function EditCurrent() {
       slug: label.toLowerCase().replaceAll(/\W/g, '-').replaceAll(/-+/g, '-').replace(/^-/, '').replace(/-$/, ''),
       images: images,
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes,
-      in_stock: isInStock
+      in_stock: itemData.in_stock
     }
     console.log(itemData)
     postData(`${url}/api/edit_items`, data);
