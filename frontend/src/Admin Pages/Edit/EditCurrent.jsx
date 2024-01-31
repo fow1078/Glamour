@@ -91,8 +91,8 @@ function EditCurrent() {
   }
 
   const [isInStock, setIsInStock] = useState(itemData.in_stock);
-  const handleInStockChange = () => {
-    setIsInStock(!isInStock)
+  const handleInStockChange = (e) => {
+      setIsInStock(!isInStock)
   }
 
   const handleClick = (e) => {
@@ -203,7 +203,7 @@ function EditCurrent() {
               </Col>
               <Col xs={12} md={6} className='edit_delete_btn' style={{display: 'flex', alignItems: 'flex-end', justifyContent: 'end'}}>
                 <div>
-                  <input className='size-input-control' name='item-inStock' id='item-inStock' value={isInStock} type='checkbox' onChange={handleInStockChange} />
+                  <input className='size-input-control' name='item-inStock' id='item-inStock' value={isInStock} checked={isInStock} type='checkbox' onChange={handleInStockChange} />
                   <label htmlFor='item-inStock' style={{fontSize: '16px', fontWeight: '400'}}>In Stock</label>
                 </div>
               </Col>
