@@ -91,7 +91,7 @@ function EditCurrent() {
   }
 
   const [isInStock, setIsInStock] = useState(itemData.in_stock);
-  const handleInStockChange = (e) => {
+  const handleInStockChange = () => {
       setIsInStock(!isInStock)
   }
 
@@ -111,10 +111,8 @@ function EditCurrent() {
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes,
       in_stock: isInStock
     }
-    console.log("itemdata" + JSON.stringify(itemData))
-    console.log("data" + JSON.stringify(data))
     postData(`${url}/api/edit_items`, data);
-    // setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500)
+    setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500)
   }
 
   const handleDelete = (e, id) => {
