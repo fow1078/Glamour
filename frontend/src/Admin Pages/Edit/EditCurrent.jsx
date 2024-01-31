@@ -90,7 +90,7 @@ function EditCurrent() {
     }, 2000)
   }
 
-  const [isInStock, setIsInStock] = useState(false);
+  const [isInStock, setIsInStock] = useState(itemData.in_stock);
   const handleInStockChange = () => {
     setIsInStock(!isInStock)
   }
@@ -109,7 +109,7 @@ function EditCurrent() {
       slug: label.toLowerCase().replaceAll(/\W/g, '-').replaceAll(/-+/g, '-').replace(/^-/, '').replace(/-$/, ''),
       images: images,
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes,
-      in_stock: itemData.in_stock
+      in_stock: isInStock
     }
     console.log(itemData)
     postData(`${url}/api/edit_items`, data);
