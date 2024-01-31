@@ -112,7 +112,7 @@ function EditCurrent() {
       in_stock: isInStock
     }
     postData(`${url}/api/edit_items`, data);
-    setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500)
+    // setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500)
   }
 
   const handleDelete = (e, id) => {
