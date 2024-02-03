@@ -90,9 +90,16 @@ function EditCurrent() {
     }, 2000)
   }
 
+  // Stock
   const [isInStock, setIsInStock] = useState(itemData.in_stock);
   const handleInStockChange = () => {
       setIsInStock(!isInStock)
+  }
+
+  // Sale 
+  const [onSale, setOnSale] = useState(itemData.on_sale)
+  const handleOnSaleChange = () => {
+    setOnSale(!onSale)
   }
 
   const handleClick = (e) => {
@@ -109,7 +116,8 @@ function EditCurrent() {
       slug: label.toLowerCase().replaceAll(/\W/g, '-').replaceAll(/-+/g, '-').replace(/^-/, '').replace(/-$/, ''),
       images: images,
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes,
-      in_stock: isInStock
+      in_stock: isInStock,
+      on_sale: onSale,
     }
     postData(`${url}/api/edit_items`, data);
     setTimeout(() => { window.location = '/z8d6Ta3H49iJb3S9AR6XtTpb/edit'; }, 500)
@@ -201,8 +209,12 @@ function EditCurrent() {
               </Col>
               <Col xs={12} md={6} className='edit_delete_btn' style={{display: 'flex', alignItems: 'flex-end', justifyContent: 'end'}}>
                 <div>
+                  <input className='size-input-control' name='item-inStock' id='item-inStock' value={onSale} checked={onSale} type='checkbox' onChange={handleOnSaleChange} />
+                  <label htmlFor='item-inStock' style={{fontSize: '16px', fontWeight: '400', marginRight: '10px'}}>On Sale</label>
+                </div>
+                <div>
                   <input className='size-input-control' name='item-inStock' id='item-inStock' value={isInStock} checked={isInStock} type='checkbox' onChange={handleInStockChange} />
-                  <label htmlFor='item-inStock' style={{fontSize: '16px', fontWeight: '400'}}>In Stock</label>
+                  <label htmlFor='item-inStock' style={{fontSize: '16px', fontWeight: '400', marginRight: '10px'}}>In Stock</label>
                 </div>
               </Col>
             </Row>

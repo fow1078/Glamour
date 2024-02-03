@@ -85,6 +85,9 @@ function AdminAddNew() {
       slug: label.toLowerCase().replaceAll(/\W/g, '-').replaceAll(/-+/g, '-').replace(/^-/, '').replace(/-$/, ''),
       images: images,
       in_stock: true,
+      on_sale: false, 
+      sale_price_uah: 0,
+      sale_price_usd: 0,
       sizes: uniqeSizes.length < 1 ? '' : uniqeSizes,
     }
     postData(`${url}/api/data`, data);

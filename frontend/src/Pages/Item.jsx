@@ -66,7 +66,16 @@ function Item() {
             <Col xs={{span: 12}} md={{span: 6, offset: 1}} style={{margin: 'auto'}}>
               <div style={{width: '100%', display: 'flex', flexDirection: 'column',}}>
                 <h5 style={{color: '#fff', fontSize: '18px'}}>{itemData.name}</h5>
-                <p style={{color: '#fff', marginBottom: '10px'}}>{isUSD ? `$${itemData.price_USD} USD` :  `₴${itemData.price_UAH} UAH`}</p>
+                {itemData.on_sale ? <>
+                    <p style={{marginBottom: '5px', textDecoration: 'line-through', textDecorationColor: 'red', textDecorationThickness: '1.75px', color: '#c5c5c5'}}>{isUSD ? '$' + itemData.sale_price_USD + ' USD'  : '₴' + itemData.sale_price_UAH + ' UAH'}</p>
+                    <h6><p style={{color: '#fff', marginBottom: '10px'}}>{isUSD ? `$${itemData.price_USD} USD` :  `₴${itemData.price_UAH} UAH`}</p></h6>
+                  </>
+                :
+                  <>
+                    <p style={{color: '#fff', marginBottom: '10px'}}>{isUSD ? `$${itemData.price_USD} USD` :  `₴${itemData.price_UAH} UAH`}</p>
+                  </>
+                }
+                
               </div>
               <div style={{width: '100%'}}>
                 <Sizes sizes={itemData.sizes === '' ? ['OS'] : tmpSizes} size={size} setSize={setSize} />

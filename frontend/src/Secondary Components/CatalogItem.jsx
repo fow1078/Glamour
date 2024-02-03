@@ -23,7 +23,16 @@ function CatalogItem({data}) {
       </Link>
       <div>
         <Link to={`/catalog/${data.slug}-${data.itemID}`} state={{ data: data }}><h5 className='item_title' style={{marginTop: '20px'}}>{data.name}</h5></Link>
-        <Link to={`/catalog/${data.slug}-${data.itemID}`} state={{ data: data }}><h6 className='item_price' style={{textDecoration: data.in_stock ? '' : 'line-through'}}>{data.in_stock ? isUSD ? data.price_USD + '$' : data.price_UAH + '₴' : 'SOLDOUT'}</h6></Link>
+        {data.on_sale ? 
+          <Link to={`/catalog/${data.slug}-${data.itemID}`} state={{ data: data }}>
+            <h6 className='item_price' style={{textDecoration: data.in_stock ? '' : 'line-through'}}>
+              <p style={{marginBottom: '5px', textDecoration: 'line-through', textDecorationColor: 'red', textDecorationThickness: '1.75px'}}>{isUSD ? data.sale_price_USD + '$' : data.sale_price_UAH + '₴'}</p>
+              <h6>{data.in_stock ? isUSD ? data.price_USD + '$' : data.price_UAH + '₴' : 'SOLDOUT'}</h6>
+            </h6>
+          </Link> 
+          : 
+          <Link to={`/catalog/${data.slug}-${data.itemID}`} state={{ data: data }}><h6 className='item_price' style={{textDecoration: data.in_stock ? '' : 'line-through'}}>{data.in_stock ? isUSD ? data.price_USD + '$' : data.price_UAH + '₴' : 'SOLDOUT'}</h6></Link>
+        }
       </div>
     </Col>
   )

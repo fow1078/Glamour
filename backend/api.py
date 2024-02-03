@@ -48,6 +48,9 @@ def data():
                     data['slug'],
                     string_sizes,
                     data['in_stock'],
+                    data['on_sale'],
+                    data['sale_price_uah'],
+                    data['sale_price_usd'],
                     string_images)
         
         try:
@@ -304,16 +307,27 @@ def edit_items():
         for image in item_data['images']:
             string_new_images += image
             string_new_images += ", "
+
         
         item.name = item_data['label']
-        item.price_USD = item_data['price']['usd']
-        item.price_UAH = item_data['price']['uah']
         item.description = item_data['description_UA']
         item.description_en = item_data['description_EN']
         item.slug = item_data['slug']
         item.sizes = string_new_sizes
         item.in_stock = item_data['in_stock']
         item.image = string_new_images
+        item.on_sale = item_data['on_sale']
+
+        if (item_data['on_sale'] == True):
+            item.sale_price_USD = item.price_USD
+            item.sale_price_UAH = item.price_UAH
+            item.price_USD = item_data['price']['usd']
+            item.price_UAH = item_data['price']['uah']
+        else: 
+            item.price_USD = item_data['price']['usd']
+            item.price_UAH = item_data['price']['uah']
+
+        
         
         db.session.commit()
         upload_data_to_storage(KEYS["KEY_ITEM"])

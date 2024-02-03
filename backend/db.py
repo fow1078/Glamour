@@ -13,9 +13,12 @@ class Item(db.Model):
     slug = db.Column(db.String(100), index=True)
     sizes = db.Column(db.String(30))
     in_stock = db.Column(db.Boolean, nullable=False)
+    on_sale = db.Column(db.Boolean, nullable=False)
+    sale_price_USD = db.Column(db.Integer, nullable=False)
+    sale_price_UAH = db.Column(db.Integer, nullable=False) 
     image = db.Column(db.String(100000))
     
-    def __init__(self, itemID, name, price_USD, price_UAH, description, description_en, slug, sizes, in_stock, image):
+    def __init__(self, itemID, name, price_USD, price_UAH, description, description_en, slug, sizes, in_stock, on_sale, sale_price_UAH, sale_price_USD, image):
         self.itemID = itemID
         self.name = name
         self.price_USD = price_USD
@@ -25,6 +28,9 @@ class Item(db.Model):
         self.slug = slug
         self.sizes = sizes
         self.in_stock = in_stock
+        self.on_sale = on_sale
+        self.sale_price_USD = sale_price_USD
+        self.sale_price_UAH = sale_price_UAH
         self.image = image
     
     def toJSON(self):
@@ -39,6 +45,9 @@ class Item(db.Model):
             'slug': self.slug,
             'sizes': self.sizes,
             'in_stock': self.in_stock,
+            'on_sale': self.on_sale,
+            'sale_price_USD': self.sale_price_USD,
+            'sale_price_UAH': self.sale_price_UAH,
             'image': self.image
         }
     
